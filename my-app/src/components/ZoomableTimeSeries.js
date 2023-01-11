@@ -5,7 +5,7 @@ import { sampleData } from '../data/sample_data';
 let newArr = sampleData.map((innerArr) => {
   return [innerArr[0], innerArr[1]]
 });
-console.log(newArr);
+// console.log(newArr);
 
 
 export default function ZoomableTimeSeries() {

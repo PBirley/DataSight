@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PieChart from './PieChart'
 import ZoomableTimeSeries from './ZoomableTimeSeries'
 import styles from './DataDashboard.module.css'
+import { streamData } from '../api-service'
+import { genderTotal } from '../data-service'
 
 export default function DataDashboard() {
+
+  useEffect(() => {
+    streamData();
+  },[])
+
   return (
     <div>
       <div className={styles.chartElement}>
@@ -11,7 +18,7 @@ export default function DataDashboard() {
       </div>
       <div className={styles.flexContainer}>
         <div className={styles.chartElement}>
-          <PieChart genderData={[100,70]}/>
+          <PieChart genderData={[genderTotal.menTotal, genderTotal.womanTotal]}/>
         </div>
         <div className={styles.chartElement}>
           <PieChart genderData={[100,200]}/>
