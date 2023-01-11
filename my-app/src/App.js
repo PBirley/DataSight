@@ -1,32 +1,27 @@
-import { useState } from 'react';
 import './App.css';
-import PeopleGraph from './components/PeopleGraph';
-import PieChart from './components/PieChart';
-import ZoomableTimeSeries from './components/ZoomableTimeSeries';
-import logo from './images/logo.svg';
+import DataDashboard from './components/DataDashboard';
+import NavBar from './components/NavBar';
 
 function App() {
-  const [genderData, setGenderData] = useState([105, 121])
+  // const [genderData, setGenderData] = useState([105, 121])
   
-  function updateGenderStatus () {
-    let  [men, woman] = genderData;
-    men += Math.round(Math.random())
-    woman += Math.round(Math.random())
+  // function updateGenderStatus () {
+  //   let  [men, woman] = genderData;
+  //   men += Math.round(Math.random())
+  //   woman += Math.round(Math.random())
   
-    setGenderData([men, woman])
+  //   setGenderData([men, woman])
   
-    console.log(genderData);
-  }
+  //   console.log(genderData);
+  // }
   // updateGenderStatus()
   // setTimeout(updateGenderStats, 1000)
 
   
   return (
     <div>
-      <img src={logo} alt=''/>
-      <ZoomableTimeSeries />
-      {/* <PeopleGraph /> */}
-      <PieChart genderData={genderData} />
+      <NavBar />
+      <DataDashboard />
     </div>
   );
 }

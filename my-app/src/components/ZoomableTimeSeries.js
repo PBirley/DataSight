@@ -1,10 +1,16 @@
 import React from 'react'
 import ReactApexChart from 'react-apexcharts'
+import { sampleData } from '../data/sample_data';
+
+let newArr = sampleData.map((innerArr) => {
+  return [innerArr[0], innerArr[1]]
+});
+console.log(newArr);
 
 
 export default function ZoomableTimeSeries() {
   const series = [{
-    data: [[Date.now(), 34], [Date.now()+1000, 54] , [Date.now()+2000, 43]]
+    data: newArr
   }]
   const options = {
     chart: {
@@ -26,10 +32,10 @@ export default function ZoomableTimeSeries() {
     markers: {
       size: 0,
     },
-    title: {
-      text: 'Stock Price Movement',
-      align: 'left'
-    },
+    // title: {
+    //   text: 'Stock Price Movement',
+    //   align: 'left'
+    // },
     fill: {
       type: 'gradient',
       gradient: {
@@ -41,25 +47,26 @@ export default function ZoomableTimeSeries() {
       },
     },
     yaxis: {
-      labels: {
-        formatter: function (val) {
-          return (val / 1000000).toFixed(0);
-        },
-      },
+      // labels: {
+      //   formatter: function (val) {
+      //     return (val / 1000000).toFixed(0);
+      //   },
+      // },
       title: {
-        text: 'Price'
+        text: 'Number of people per 10s'
       },
     },
     xaxis: {
       type: 'datetime',
     },
     tooltip: {
-      shared: false,
-      y: {
-        formatter: function (val) {
-          return (val / 1000000).toFixed(0)
-        }
-      }
+      // shared: false,
+      // y: {
+      //   formatter: function (val) {
+      //     return (val / 1000000).toFixed(0)
+      //   }
+      // }
+      // dataLabels: 'Number of people'
     }
   };
   return (
