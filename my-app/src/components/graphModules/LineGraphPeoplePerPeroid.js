@@ -9,9 +9,6 @@ export default function LineGraphPeoplePerPeroid() {
 
   const data = useSelector(state => state.streamingData)
 
-  /* 
-    TODO: peroid should vary on length of data (or user input)
-  */
   useEffect(() => {
 
     if (data.length > 0) {
