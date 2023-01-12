@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Chart from 'react-apexcharts'
 import { useSelector } from "react-redux";
-import { parseGenderData } from '../data-service';
+import { parseGenderData } from '../../data-service';
 
-export default function PieChart() {
+export default function PieChartGenders() {
   const [genderData, setGenderData] = useState([0,0])
   const options = { labels: ["Men", "Women"] };
 

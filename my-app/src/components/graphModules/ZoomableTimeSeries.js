@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactApexChart from 'react-apexcharts'
-import { sampleData } from '../data/sample_data';
+import { sampleData } from '../../data/sample_data';
 
 let newArr = sampleData.map((innerArr) => {
   return [innerArr[0], innerArr[1]]
