@@ -3,7 +3,7 @@ import Chart from 'react-apexcharts'
 import { useSelector } from "react-redux";
 import { parseEthnicityData } from '../../data-service';
 
-export default function PieChartGenders() {
+export default function PieChartEthnicities() {
   const [ethnicityData, setEthnicityData] = useState([0,0,0,0,0])
   const options = { labels: ["White", "Black", "Asian", "Middle-Eastern", "Latin American"] };
 
@@ -20,7 +20,7 @@ export default function PieChartGenders() {
         <div className="mixed-chart">
           <Chart
             options={options}
-            series={ethnicityData.map((data) => data)}
+            series={ethnicityData.map((ethnicityData) => ethnicityData)}
             type="donut"
             width="300"
           />

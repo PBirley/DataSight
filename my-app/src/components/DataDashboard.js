@@ -4,6 +4,8 @@ import styles from './DataDashboard.module.css'
 import { streamData } from '../api-service'
 import { useDispatch } from "react-redux";
 import PieChartGenders from './graphModules/PieChartGenders'
+import PieChartEthnicities from './graphModules/PieChartEthnicities';
+import BarChartAges from './graphModules/BarChartAges';
 
 export default function DataDashboard() {
   const dispatch = useDispatch();
@@ -21,6 +23,12 @@ export default function DataDashboard() {
       <div className={styles.flexContainer}>
         <div className={styles.chartElement}>
           <PieChartGenders />
+        </div>
+        <div className={styles.chartElement}>
+          <BarChartAges />
+        </div>
+        <div className={styles.chartElement}>
+          <PieChartEthnicities />
         </div>
         <div className={styles.chartElement}>
           <button>ADD</button>
