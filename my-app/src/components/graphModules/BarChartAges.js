@@ -7,9 +7,21 @@ export default function BarChartAges() {
 
   const [ageData, setAgeData] = useState([0,0,0,0,0]);
 
+  
+  const data = useSelector(state => state.streamingData);
+  
+  useEffect(() => {
+    setAgeData(parseAgeData(data))
+  }, [data]);
+  
   const options = { 
+    title: {text: 'Detections by Age Bracket'},
     xaxis:{
-      categories: ['0-20', '21-30', '31-40', '41-60', '60+']
+      categories: ['0-20', '21-30', '31-40', '41-60', '60+'],
+      title: {text: 'Detections'}
+    },
+    yaxis:{
+      title: {text: 'Age Ranges'}
     },
     plotOptions: {
       bar: {
@@ -20,13 +32,8 @@ export default function BarChartAges() {
     dataLabels: {
       enabled: false
     },
+
   };
-
-  const data = useSelector(state => state.streamingData);
-
-  useEffect(() => {
-    setAgeData(parseAgeData(data))
-  }, [data]);
 
   return (
     <div id="chart">
@@ -34,7 +41,7 @@ export default function BarChartAges() {
         options={options} 
         series={[{data:ageData}]} 
         type="bar" 
-        // height='200'
+        height={250}
       />
   </div>
   )

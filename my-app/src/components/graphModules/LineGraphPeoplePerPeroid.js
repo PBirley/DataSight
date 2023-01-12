@@ -5,6 +5,7 @@ import { countPeoplePerPeroid } from '../../data-service';
 
 export default function LineGraphPeoplePerPeroid() {
   const [peoplePerPeroidData, setPeoplePerPeroidData] = useState([])
+  const [peroid, setPeroid] = useState(1);
 
   const data = useSelector(state => state.streamingData)
 
@@ -12,11 +13,20 @@ export default function LineGraphPeoplePerPeroid() {
     TODO: peroid should vary on length of data (or user input)
   */
   useEffect(() => {
-    setPeoplePerPeroidData(countPeoplePerPeroid(data))
+
+    if (data.length > 0) {
+      const [counts, peroid] = countPeoplePerPeroid(data);
+      setPeoplePerPeroidData(counts);
+      setPeroid(peroid);
+    }
+
   }, [data])
 
 
   const options = {
+    title: {
+      text: 'Number of Detections over Time'
+    },
     chart: {
       type: 'area',
       stacked: false,
@@ -45,7 +55,7 @@ export default function LineGraphPeoplePerPeroid() {
     },
     yaxis: {
       title: {
-        text: 'Number of people per 10s'
+        text: 'Number of people per ' + Math.round(peroid/1000) + 's'
       },
     },
     xaxis: {
@@ -62,7 +72,8 @@ export default function LineGraphPeoplePerPeroid() {
       options={options} 
       series={[{data: peoplePerPeroidData.length > 1 ? peoplePerPeroidData : [[0,0], [0,0]]}]} 
       type="area" 
-      height={350} />
+      height={350} 
+      />
   </div>  
   )
 }

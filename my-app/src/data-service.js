@@ -44,9 +44,15 @@ export const parseAgeData = (data) => {
   return ageCounts;
 }
 
-export const countPeoplePerPeroid = (data, peroid=10000) => {
+export const countPeoplePerPeroid = (data) => {
   //each array element [timestamp, count]
   const countPerPeroid = [];
+
+  let peroid = 10000;
+  if (data.length > 20) {
+    const dataPoint = 20;
+    peroid = (data.slice(-1)[0][0]-data[0][0])/dataPoint;
+  }
 
   if (data.length === 0 ) return countPeoplePerPeroid
   //intialize at
@@ -67,5 +73,5 @@ export const countPeoplePerPeroid = (data, peroid=10000) => {
   }
   countPerPeroid.push([currentTimestamp,peoridCount]);
 
-  return countPerPeroid;
+  return [countPerPeroid, peroid];
 }

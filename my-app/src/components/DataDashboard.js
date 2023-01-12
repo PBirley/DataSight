@@ -6,7 +6,6 @@ import PieChartGenders from './graphModules/PieChartGenders'
 import PieChartEthnicities from './graphModules/PieChartEthnicities';
 import BarChartAges from './graphModules/BarChartAges';
 import LineGraphPeoplePerPeroid from './graphModules/LineGraphPeoplePerPeroid';
-import VideoPlayer from './VideoPlayer';
 
 export default function DataDashboard() {
   const dispatch = useDispatch();
@@ -31,9 +30,9 @@ export default function DataDashboard() {
         <div className={styles.chartElement}>
           <PieChartEthnicities />
         </div>
-        <div className={styles.chartElement}>
+        {/* <div className={styles.chartElement}>
           <button>ADD</button>
-        </div>
+        </div> */}
       </div>
     </div>
   )
