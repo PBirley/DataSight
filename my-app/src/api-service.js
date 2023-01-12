@@ -2,7 +2,7 @@ import { updateStreamingData } from "./data-service";
 
 const rootUrl = 'http://localhost:4000';
 
-export const streamData = async () => {
+export const streamData = async (dispatch) => {
   const response = await fetch(rootUrl + '/streamData');
   const reader = response.body.getReader();
 
@@ -14,7 +14,7 @@ export const streamData = async () => {
       return;
     }
 
-    updateStreamingData(value);
+    updateStreamingData(dispatch, value);
 
     read()
   };
