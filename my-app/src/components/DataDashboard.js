@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import ZoomableTimeSeries from './graphModules/ZoomableTimeSeries'
 import styles from './DataDashboard.module.css'
 import { streamData } from '../api-service'
 import { useDispatch } from "react-redux";
@@ -7,6 +6,7 @@ import PieChartGenders from './graphModules/PieChartGenders'
 import PieChartEthnicities from './graphModules/PieChartEthnicities';
 import BarChartAges from './graphModules/BarChartAges';
 import LineGraphPeoplePerPeroid from './graphModules/LineGraphPeoplePerPeroid';
+import VideoPlayer from './VideoPlayer';
 
 export default function DataDashboard() {
   const dispatch = useDispatch();
