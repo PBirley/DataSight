@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import PieChartGenders from './graphModules/PieChartGenders'
 import PieChartEthnicities from './graphModules/PieChartEthnicities';
 import BarChartAges from './graphModules/BarChartAges';
+import LineGraphPeoplePerPeroid from './graphModules/LineGraphPeoplePerPeroid';
 
 export default function DataDashboard() {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export default function DataDashboard() {
   return (
     <div>
       <div className={styles.chartElement}>
-        <ZoomableTimeSeries />
+        <LineGraphPeoplePerPeroid />
       </div>
       <div className={styles.flexContainer}>
         <div className={styles.chartElement}>

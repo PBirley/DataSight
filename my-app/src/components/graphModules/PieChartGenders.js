@@ -20,9 +20,8 @@ export default function PieChartGenders() {
         <div className="mixed-chart">
           <Chart
             options={options}
-            series={genderData.map((data) => data)}
+            series={genderData}
             type="donut"
-            width="300"
           />
         </div>
       </div>

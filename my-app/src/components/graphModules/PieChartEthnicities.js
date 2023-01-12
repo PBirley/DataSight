@@ -20,9 +20,10 @@ export default function PieChartEthnicities() {
         <div className="mixed-chart">
           <Chart
             options={options}
-            series={ethnicityData.map((ethnicityData) => ethnicityData)}
+            series={ethnicityData}
             type="donut"
-            width="300"
+            // width="300"
+            height='300'
           />
         </div>
       </div>

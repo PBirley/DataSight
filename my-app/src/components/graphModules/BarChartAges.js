@@ -34,6 +34,7 @@ export default function BarChartAges() {
         options={options} 
         series={[{data:ageData}]} 
         type="bar" 
+        // height='200'
       />
   </div>
   )

@@ -11,6 +11,11 @@ export const updateStreamingData = (dispatch, packet) => {
   dispatch(addToStreamData(chunk));
 }
 
+/*
+  TODO: Current algorithms are a bit inefficent as they go through the entire array again 
+  to update the info. Instead result should be updated per element added to the streamData
+*/
+
 export const parseGenderData = (data) => {
   const menCount = data.reduce((count, element) => count + (element[2] === 'man'), 0);
   const womanCount = data.reduce((count, element) => count + (element[2] === 'woman'), 0);
@@ -37,4 +42,30 @@ export const parseAgeData = (data) => {
   }
 
   return ageCounts;
+}
+
+export const countPeoplePerPeroid = (data, peroid=10000) => {
+  //each array element [timestamp, count]
+  const countPerPeroid = [];
+
+  if (data.length === 0 ) return countPeoplePerPeroid
+  //intialize at
+  let currentTimestamp = data[0][0] + peroid;
+  let peoridCount = 0;
+  for (const el of data) {
+    if (el[0] <= currentTimestamp) {
+      peoridCount++;
+    }
+    else {
+      countPerPeroid.push([currentTimestamp,peoridCount]);
+      currentTimestamp += peroid;
+      if (el[0] <= currentTimestamp)
+        peoridCount = 1;
+      else 
+        peoridCount = 0;
+    }
+  }
+  countPerPeroid.push([currentTimestamp,peoridCount]);
+
+  return countPerPeroid;
 }

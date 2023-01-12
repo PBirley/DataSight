@@ -7,7 +7,7 @@ function sendPacket(res, packet) {
 //change this to for loop that waits between sends
 export const streamData = (req, res) => {
   try {
-    const data = [...sampleData.slice(0,20)]
+    const data = [...sampleData.slice(0)]
     for (let row of data) {
       const sendAt = row[0];
       const packet = JSON.stringify(row.slice(1));
