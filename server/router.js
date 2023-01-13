@@ -7,10 +7,9 @@ router.get('/streamData', streamData);
 
 router.get('/video', streamDemoVideo);
 
-// import base64Img from 'base64-img';
 import * as fs from 'fs';
-// const fs = require('fs');
-
+import { exec } from 'child_process'
+ 
 router.post('/userFrame', (req, res) => {
   let imageData = req.body.imageData;
   imageData = imageData.replace(/^data:image\/\w+;base64,/, '');
@@ -23,6 +22,16 @@ router.post('/userFrame', (req, res) => {
       }
       res.json({ message: 'Image saved successfully' });
   });
+
+  //Activate python script on img
+  exec('python image-processing/update_img.py', (err, stdout, stderr) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log(stdout);
+  });
+  //Return img
 
 })
 
