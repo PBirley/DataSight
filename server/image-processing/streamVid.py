@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import os
+import time
 
 path = os.getcwd() + '/image-processing'
 
@@ -17,8 +18,10 @@ while True:
   if ret:
       cv2.imshow('VIDEO FACE DETECT', frame)
       img = frame.copy()
-    #   img = cv2.resize(img, (100,100))
+    #   img = cv2.resize(img, (300,300))
       cv2.imwrite(path + '/result.jpg',img) 
+      
+    #   time.sleep(1)
            
       k = cv2.waitKey(1)
       if k == 27:
