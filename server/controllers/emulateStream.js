@@ -1,5 +1,4 @@
-import {sampleData} from '../data/sample_data.js'
-import fs from "fs";
+import { sampleData } from '../data/sample_data.js'
 const videoPath = './data/output-long.mp4'
 
 //change this to for loop that waits between sends
