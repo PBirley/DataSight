@@ -2,10 +2,6 @@ import {sampleData} from '../data/sample_data.js'
 import fs from "fs";
 const videoPath = './data/output-long.mp4'
 
-function sendPacket(res, packet) {
-  res.write(packet)
-} 
-
 //change this to for loop that waits between sends
 export const streamData = (req, res) => {
   try {
