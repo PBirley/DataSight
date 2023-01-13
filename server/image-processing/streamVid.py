@@ -16,7 +16,9 @@ while True:
       
   if ret:
       cv2.imshow('VIDEO FACE DETECT', frame)
-      cv2.imwrite(path + '/result.jpg',frame) 
+      img = frame.copy()
+    #   img = cv2.resize(img, (100,100))
+      cv2.imwrite(path + '/result.jpg',img) 
            
       k = cv2.waitKey(1)
       if k == 27:

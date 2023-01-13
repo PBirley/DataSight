@@ -20,3 +20,15 @@ export const streamData = async (dispatch) => {
   };
   read()
 }
+
+export const analyseFrame = async (imageData) => {
+  const response = await fetch('http://localhost:4000/userFrame', {
+    method: 'POST',
+    body: JSON.stringify({  imageData }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  const { processedImg } = await response.json();
+
+  return processedImg;
+}
