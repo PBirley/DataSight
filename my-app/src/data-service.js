@@ -1,4 +1,4 @@
-import { addToStreamData } from "./redux/reducer";
+import { addToStreamData } from "./redux/actions";
 
 export const updateStreamingData = (dispatch, packet) => {
   //Convert data back to an array

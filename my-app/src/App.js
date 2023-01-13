@@ -2,13 +2,13 @@ import './App.css';
 import DataDashboard from './components/DataDashboard';
 import NavBar from './components/NavBar';
 import VideoPlayer from './components/VideoPlayer';
-import Webcam2 from './components/Webcam2';
+import Webcam from './components/Webcam';
 
 function App() {
   return (
     <div>
       {/* <WebsocketsStream /> */}
-      <Webcam2 />
+      <Webcam />
       {/* <NavBar />
       <VideoPlayer />
       <DataDashboard /> */}

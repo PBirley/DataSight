@@ -20,3 +20,13 @@ export const streamData = async (dispatch) => {
   };
   read()
 }
+
+export const startStream = () => fetch(rootUrl +'/startStream');
+
+export const stopStream = () => fetch(rootUrl +'/stopStream');
+
+export const getImg = async (setAnalysedFrame) => {
+  const response = await fetch(rootUrl + '/getLatestFrame');
+  const { processedImg } = await response.json();
+  return 'data:image/jpeg;base64, ' + processedImg
+}
