@@ -1,8 +1,10 @@
 import * as fs from 'fs';
 import { exec } from 'child_process'
- 
+
+let stream = null;
+
 export const startStream = (req, res) => {
-  exec('python image-processing/streamVid.py', (err, stdout, stderr) => {
+  stream = exec('python image-processing/streamVid.py', (err, stdout, stderr) => {
     if (err) {
       console.error(err);
       return;
@@ -12,29 +14,18 @@ export const startStream = (req, res) => {
   res.status(200).send({message: 'streaming started!'});
 }
 
-export const fileWatch = (req, res) => {
-  fs.watch('./image-processing/result.jpg', (eventType, filename) => {
-    if (eventType === 'change') {
-      fs.access('./image-processing/result.jpg', fs.constants.F_OK, (err) => {
-        if (err) {
-          console.log('file not accessible')
-        } else {
-          console.log('file accessible');
-      
-          const result = fs.readFileSync('./image-processing/result.jpg')
-          const encoded_string = new Buffer.from(result).toString('base64')
-          //const base64Image = new Buffer.from(result, 'binary').toString('base64');
-          // console.log(encoded_string);
-          res.status(200).write('data:image/jpeg;base64, ' + encoded_string);
-        }
-      })
-    }
-  })
+export const stopStream = (req, res) => {
+  if (stream) {
+    console.log('killing stream')
+    stream.kill('SIGINT');
+    res.status(200).send({message: 'streaming ended!'});
+  } else {
+    res.status(500).send({message: 'no stream running'})
+  }
 }
 
-export const streamFrames = (req, res) => {
-  console.log('streaming frames');
-
+export const getLatestFrame = (req, res) => {
+  //Not convinced this fs.access is doing anything
   fs.access('./image-processing/result.jpg', fs.constants.F_OK, (err) => {
     if (err) {
       console.log(err);
@@ -46,8 +37,6 @@ export const streamFrames = (req, res) => {
       res.status(200).json({ processedImg: encoded_string })
     }
   })
-
-
 }
 
 
