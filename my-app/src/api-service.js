@@ -28,5 +28,13 @@ export const stopStream = () => fetch(rootUrl +'/stopStream');
 export const getImg = async (setAnalysedFrame) => {
   const response = await fetch(rootUrl + '/getLatestFrame');
   const { processedImg } = await response.json();
-  return 'data:image/jpeg;base64, ' + processedImg
+  // console.log(processedImg);
+  if (processedImg.length > 0) {
+    const res = 'data:image/jpeg;base64, ' + processedImg;
+    console.log('update');
+    return res;
+  } else {
+    console.log('no image', processedImg);
+    return null;
+  }
 }

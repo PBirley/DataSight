@@ -7,10 +7,13 @@ export default function Webcam() {
 
   const handleStart = async () => {
     await startStream()
-    setStreamFlag(setInterval(updateImg, 100))
+    setStreamFlag(setInterval(updateImg, 40))
   };
 
-  const updateImg = async () => setAnalysedFrame(await getImg());
+  const updateImg = async () => {
+    const newImg = await getImg()
+    if (newImg !== null) setAnalysedFrame(newImg);
+  }
 
   const handleStop = async () => {
     if(streamFlag) {
@@ -20,7 +23,7 @@ export default function Webcam() {
   };
   
 
-  return (
+return (
   <div key={100}>
       <button onClick={handleStart}>Start</button>
       <button onClick={handleStop}>Stop</button>

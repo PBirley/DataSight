@@ -2,7 +2,9 @@ import numpy as np
 import cv2
 import os
 import csv
+import time
 from keras.models import load_model
+from fasteners import InterProcessLock
 path = os.getcwd() + '/image-processing'
 
 #Load Models
@@ -177,6 +179,14 @@ file = open(path + 'liveData.csv', 'w')
 csv_writer = csv.writer(file)
 csv_writer.writerow(header)
 
+def writeImg(img): 
+    if not os.path.isfile(path + '/0.jpg'):
+        cv2.imwrite(path + '/0.jpg', img) 
+    elif not os.path.isfile(path + '/1.jpg'):
+        cv2.imwrite(path + '/1.jpg', img) 
+    elif not os.path.isfile(path + '/2.jpg'):
+        cv2.imwrite(path + '/2.jpg', img) 
+
 while True:
   ret,frame = cap.read(0)
       
@@ -185,8 +195,13 @@ while True:
     frame_count += 1
     cv2.imshow('VIDEO FACE DETECT', frame)
     img = frame.copy()
-    cv2.imwrite(path + '/result.jpg',img) 
+    
+    writeImg(img)
+    
+    # with InterProcessLock(path + '/result.jpg'):
+        # cv2.imwrite(path + '/result.jpg', img) 
         
+    # time.sleep(1)
     k = cv2.waitKey(1)
     if k == 27:
         break
