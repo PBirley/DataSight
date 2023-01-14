@@ -22,7 +22,32 @@ export default function Webcam() {
     }
   };
 
-  const startDetections = async () => streamWebcamDetections ()
+  // const startDetections = async () => streamWebcamDetections ()
+  const startDetections = async () => {
+    const response = await fetch('http://localhost:4000/getDetections/start');
+    const reader = response.body.getReader();
+  
+    const read = async () => {
+      const { done, value } = await reader.read();
+  
+      if (done) {
+        console.log('All Data Recieved');
+        return;
+      }
+      let chunk = new TextDecoder('utf-8').decode(value);
+      chunk = JSON.parse(chunk);
+      //Add the current time
+      chunk.unshift(Date.now());
+  
+      console.log(chunk);
+  
+      read()
+    };
+    read()
+  }
+  const stopDetections = async () => {
+    await fetch('http://localhost:4000/getDetections/stop');
+  }
 
 
 return (
@@ -30,6 +55,7 @@ return (
       <button onClick={handleStart}>Start</button>
       <button onClick={handleStop}>Stop</button>
       <button onClick={startDetections}>Start Detections</button>
+      <button onClick={stopDetections}>Stop Detections</button>
 
       <img src={analysedFrame} resizeMode={"contain"} alt='waiting on frame'/>
   </div>

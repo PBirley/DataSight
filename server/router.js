@@ -9,6 +9,6 @@ router.get('/video', streamDemoVideo);
 router.get('/startStream', startStream);
 router.get('/stopStream', stopStream);
 router.get('/getLatestFrame', getLatestFrame);
-router.get('/getDetections', getDetections);
+router.get('/getDetections/:cmd', getDetections);
 
 export default router;

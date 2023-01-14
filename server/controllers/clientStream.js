@@ -50,22 +50,49 @@ export const getLatestFrame = (req, res) => {
 
 let last = null
 let stopDetections = true
-export const getDetections = (req,res) => {
-  stopDetections = false
-  fs.watch('./image-processing/data.txt', (eventType, filename) => {
-    //exit condition
-    if (stopDetections === true) return res.end();
+// export const getDetections = (req,res) => {
+//   stopDetections = false
+//   fs.watch('./image-processing/data.txt', (eventType, filename) => {
+//     //exit condition
+//     if (stopDetections === true) return res.end();
 
-    if (eventType === 'change') {
-      fs.readFile('./image-processing/data.txt', 'utf-8', (err, data) => {
-        if (err) console.log(err);
+//     if (eventType === 'change') {
+//       fs.readFile('./image-processing/data.txt', 'utf-8', (err, data) => {
+//         if (err) console.log(err);
         
-        if (data !== last) {
-          console.log(data);
-          res.write(data);
-          last = data;
-        }
-      });
-    }
-  });
+//         if (data !== last) {
+//           console.log(data);
+//           res.write(data);
+//           last = data;
+//         }
+//       });
+//     }
+//   });
+// }
+
+let fileWatcher;
+export const getDetections = (req,res) => {
+  const cmd = req.params.cmd;
+
+  if (cmd === 'start') {
+    fileWatcher = fs.watch('./image-processing/data.txt', (eventType, filename) => {
+      if (eventType === 'change') {
+        fs.readFile('./image-processing/data.txt', 'utf-8', (err, data) => {
+          if (err) console.log(err);
+          
+          if (data !== last) {
+            console.log(data);
+            res.write(data);
+            last = data;
+          }
+        });
+      }
+    });
+  } else if (cmd === 'stop') {
+    fileWatcher.close()
+    res.end()
+  } else {
+    res.end('invalid request')
+  }
+
 }
