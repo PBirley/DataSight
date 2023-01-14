@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { getImg, startDetectionsOnStream, startStream, stopDetectionsOnStream, stopStream } from '../api-service';
+import styles from './LiveStream.module.css';
 
 export default function LiveStream() {
   const [analysedFrame, setAnalysedFrame] = useState(null);
@@ -31,10 +32,12 @@ export default function LiveStream() {
 
 
 return (
-  <div key={100}>
+  <div className={styles.container}>
+    <div>
       <button onClick={handleStart}>Start</button>
       <button onClick={handleStop}>Stop</button>
-      <img src={analysedFrame} resizeMode={"contain"} alt='waiting on frame'/>
-  </div>
+    </div>
+    <img class='generic-container' src={analysedFrame} resizeMode={"contain"} alt='waiting on frame'/>
+</div>
   );
 }

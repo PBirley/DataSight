@@ -21,6 +21,33 @@ export const streamData = async (dispatch) => {
   read()
 }
 
+export const startDetectionsOnStream = async () => {
+  const response = await fetch('http://localhost:4000/getDetections/start');
+  const reader = response.body.getReader();
+
+  const read = async () => {
+    const { done, value } = await reader.read();
+
+    if (done) {
+      console.log('All Data Recieved');
+      return;
+    }
+
+    // updateStreamingData(dispatch, )
+
+    let chunk = new TextDecoder('utf-8').decode(value);
+    chunk = JSON.parse(chunk);
+    //Add the current time
+    chunk.unshift(Date.now());
+
+    // console.log(chunk);
+
+    read()
+  };
+  read()
+}
+
+
 export const startStream = () => fetch(rootUrl + '/stream/start');
 export const stopStream = () => fetch(rootUrl + '/stream/end');
 
@@ -36,27 +63,5 @@ export const getImg = async (setAnalysedFrame) => {
   }
 }
 
-export const startDetectionsOnStream = async () => {
-  const response = await fetch('http://localhost:4000/getDetections/start');
-  const reader = response.body.getReader();
-
-  const read = async () => {
-    const { done, value } = await reader.read();
-
-    if (done) {
-      console.log('All Data Recieved');
-      return;
-    }
-    let chunk = new TextDecoder('utf-8').decode(value);
-    chunk = JSON.parse(chunk);
-    //Add the current time
-    chunk.unshift(Date.now());
-
-    console.log(chunk);
-
-    read()
-  };
-  read()
-}
 
 export const stopDetectionsOnStream = async () => await fetch('http://localhost:4000/getDetections/stop');
