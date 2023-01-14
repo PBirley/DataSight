@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react'
 import styles from './DataDashboard.module.css'
-import { useDispatch } from "react-redux";
 import PieChartGenders from './graphModules/PieChartGenders'
 import PieChartEthnicities from './graphModules/PieChartEthnicities';
 import BarChartAges from './graphModules/BarChartAges';
 import LineGraphPeoplePerPeroid from './graphModules/LineGraphPeoplePerPeroid';
 
-export default function DataDashboardModular({data}) {
-  const dispatch = useDispatch();
+export default function DataDashboardModular() {
 
   return (
     <div>

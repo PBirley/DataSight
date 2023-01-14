@@ -8,6 +8,8 @@ export const updateStreamingData = (dispatch, packet) => {
   //Add the current time
   chunk.unshift(Date.now());
 
+  console.log('adding new detections', chunk);
+
   dispatch(addToStreamData(chunk));
 }
 

@@ -21,7 +21,7 @@ export const streamData = async (dispatch) => {
   read()
 }
 
-export const startDetectionsOnStream = async () => {
+export const startDetectionsOnStream = async (dispatch) => {
   const response = await fetch('http://localhost:4000/getDetections/start');
   const reader = response.body.getReader();
 
@@ -33,12 +33,12 @@ export const startDetectionsOnStream = async () => {
       return;
     }
 
-    // updateStreamingData(dispatch, )
+    updateStreamingData(dispatch, value)
 
-    let chunk = new TextDecoder('utf-8').decode(value);
-    chunk = JSON.parse(chunk);
-    //Add the current time
-    chunk.unshift(Date.now());
+    // let chunk = new TextDecoder('utf-8').decode(value);
+    // chunk = JSON.parse(chunk);
+    // //Add the current time
+    // chunk.unshift(Date.now());
 
     // console.log(chunk);
 

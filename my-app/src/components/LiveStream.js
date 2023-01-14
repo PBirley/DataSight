@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { getImg, startDetectionsOnStream, startStream, stopDetectionsOnStream, stopStream } from '../api-service';
 import styles from './LiveStream.module.css';
 
 export default function LiveStream() {
   const [analysedFrame, setAnalysedFrame] = useState(null);
   const [streamFlag, setStreamFlag] = useState(null);
+  const dispatch = useDispatch();
 
   const handleStart = async () => {
     //TODO: Loading img needed while, whilst waiting for first img
     startStream()
-    startDetectionsOnStream()
+    startDetectionsOnStream(dispatch)
 
     //Stream is in fact series of images 
     setStreamFlag(setInterval(getLatestFrame, 50))

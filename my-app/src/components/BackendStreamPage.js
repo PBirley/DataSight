@@ -8,7 +8,7 @@ export default function BackendStreamPage() {
   return (
     <div>
       <LiveStream />
-      <DataDashboardModular data={data}/>
+      <DataDashboardModular />
     </div>
   )
 }
