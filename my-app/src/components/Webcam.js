@@ -6,8 +6,9 @@ export default function Webcam() {
   const [streamFlag, setStreamFlag] = useState(null);
 
   const handleStart = async () => {
-    await startStream()
-    setStreamFlag(setInterval(updateImg, 40))
+    startStream()
+    startDetections()
+    setStreamFlag(setInterval(updateImg, 70))
   };
 
   const updateImg = async () => {
@@ -17,6 +18,7 @@ export default function Webcam() {
 
   const handleStop = async () => {
     if(streamFlag) {
+      await stopDetections();
       clearInterval(streamFlag)
       await stopStream()
     }
@@ -54,8 +56,8 @@ return (
   <div key={100}>
       <button onClick={handleStart}>Start</button>
       <button onClick={handleStop}>Stop</button>
-      <button onClick={startDetections}>Start Detections</button>
-      <button onClick={stopDetections}>Stop Detections</button>
+      {/* <button onClick={startDetections}>Start Detections</button>
+      <button onClick={stopDetections}>Stop Detections</button> */}
 
       <img src={analysedFrame} resizeMode={"contain"} alt='waiting on frame'/>
   </div>

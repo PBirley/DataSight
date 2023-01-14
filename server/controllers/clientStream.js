@@ -5,6 +5,20 @@ import { exec } from 'child_process'
 */
 
 let stream = null;
+export const controlStream = async (req, res) => {
+  const cmd = req.params.cmd;
+  if (cmd === 'start') {
+    //Start python script
+    stream = exec('python image-processing/streamVid.py', (err, stdout, stderr) => {if (err) console.log(err)} )
+    res.status(200).send({message: 'streaming started!'});
+  } else if (cmd === 'end') {
+    stream.kill('SIGINT');
+    res.status(200).send({message: 'streaming ended!'});
+  } else {
+    res.end('invalid request')
+  }
+}
+
 export const startStream = (req, res) => {
   stream = exec('python image-processing/streamVid.py', (err, stdout, stderr) => {
     if (err) {
@@ -20,7 +34,6 @@ export const stopStream = (req, res) => {
   if (stream) {
     console.log('killingStream');
     stream.kill('SIGINT');
-    stopDetections = true;
     res.status(200).send({message: 'streaming ended!'});
   } else {
     res.status(500).send({message: 'no stream running'});
@@ -49,27 +62,6 @@ export const getLatestFrame = (req, res) => {
 }
 
 let last = null
-let stopDetections = true
-// export const getDetections = (req,res) => {
-//   stopDetections = false
-//   fs.watch('./image-processing/data.txt', (eventType, filename) => {
-//     //exit condition
-//     if (stopDetections === true) return res.end();
-
-//     if (eventType === 'change') {
-//       fs.readFile('./image-processing/data.txt', 'utf-8', (err, data) => {
-//         if (err) console.log(err);
-        
-//         if (data !== last) {
-//           console.log(data);
-//           res.write(data);
-//           last = data;
-//         }
-//       });
-//     }
-//   });
-// }
-
 let fileWatcher;
 export const getDetections = (req,res) => {
   const cmd = req.params.cmd;
@@ -79,7 +71,6 @@ export const getDetections = (req,res) => {
       if (eventType === 'change') {
         fs.readFile('./image-processing/data.txt', 'utf-8', (err, data) => {
           if (err) console.log(err);
-          
           if (data !== last) {
             console.log(data);
             res.write(data);
