@@ -8,12 +8,12 @@ import BarChartAges from './graphModules/BarChartAges';
 import LineGraphPeoplePerPeroid from './graphModules/LineGraphPeoplePerPeroid';
 
 export default function DataDashboard() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  //On page render begin streaming the data
-  useEffect(() => {
-    streamData(dispatch);
-  },[dispatch])
+  // //On page render begin streaming the data
+  // useEffect(() => {
+  //   streamData(dispatch);
+  // },[dispatch])
 
   return (
     <div>

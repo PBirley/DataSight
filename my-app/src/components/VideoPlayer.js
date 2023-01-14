@@ -6,7 +6,7 @@ export default function VideoPlayer() {
   return (
     <div className={style.videoPlayerContainer}>
       <ReactPlayer 
-          url='http://localhost:4000/video'
+          url='http://localhost:4000/demoVideo'
           playing={true}
           controls={false}
           //needs to be muted to autoplay!

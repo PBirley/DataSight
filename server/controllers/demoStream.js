@@ -3,22 +3,42 @@ const videoPath = './data/output-long.mp4'
 import * as fs from 'fs';
 
 //change this to for loop that waits between sends
-export const streamData = (req, res) => {
+let stagedSetTimeout = [];
+export const streamDemoData = (req, res) => {
   try {
-    const data = [...sampleData.slice(0)]
-    for (let row of data) {
-      const sendAt = row[0];
-      const packet = JSON.stringify(row.slice(1));
+    const cmd = req.params.cmd;
+
+    if (cmd === 'start') {
+      const data = [...sampleData.slice(0)]
+      for (let row of data) {
+        const sendAt = row[0];
+        const packet = JSON.stringify(row.slice(1));
+        const timeOut = setTimeout(() => {
+          res.write(packet);
+          console.log(packet);
+        }, sendAt);
+  
+        stagedSetTimeout.push(timeOut)
+      }
       setTimeout(() => {
-        res.write(packet)
-        console.log(packet)
-      }, sendAt);
+        console.log('stream ended');
+        res.end();
+      }, data.slice(-1)[0][0]);
+      return
+
+    } else if (cmd === 'stop') {
+      console.log('clearing timeouts')
+      for (let timeout of stagedSetTimeout) {
+        clearTimeout(timeout);
+      }
+      res.end();
+
+    } else {
+      res.end('invalid request');
     }
-    setTimeout(() => {
-      console.log('stream ended');
-      res.end()
-    }, data.slice(-1)[0][0]);
-    return
+
+
+
   } catch (error) {
     console.log(error)
   }

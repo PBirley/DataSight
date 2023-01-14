@@ -2,8 +2,8 @@ import { updateStreamingData } from "./data-service";
 
 const rootUrl = 'http://localhost:4000';
 
-export const streamData = async (dispatch) => {
-  const response = await fetch(rootUrl + '/streamData');
+export const streamDemoDataStart = async (dispatch) => {
+  const response = await fetch(rootUrl + '/streamDemoData/start');
   const reader = response.body.getReader();
 
   const read = async () => {
@@ -21,8 +21,10 @@ export const streamData = async (dispatch) => {
   read()
 }
 
+export const streamDemoDataStop = async () => await fetch(rootUrl + '/streamDemoData/stop');
+
 export const startDetectionsOnStream = async (dispatch) => {
-  const response = await fetch('http://localhost:4000/getDetections/start');
+  const response = await fetch(rootUrl + 'getDetections/start');
   const reader = response.body.getReader();
 
   const read = async () => {
@@ -34,14 +36,6 @@ export const startDetectionsOnStream = async (dispatch) => {
     }
 
     updateStreamingData(dispatch, value)
-
-    // let chunk = new TextDecoder('utf-8').decode(value);
-    // chunk = JSON.parse(chunk);
-    // //Add the current time
-    // chunk.unshift(Date.now());
-
-    // console.log(chunk);
-
     read()
   };
   read()
