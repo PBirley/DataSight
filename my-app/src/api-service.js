@@ -21,9 +21,8 @@ export const streamData = async (dispatch) => {
   read()
 }
 
-export const startStream = () => fetch(rootUrl + '/startStream');
-
-export const stopStream = () => fetch(rootUrl + '/stopStream');
+export const startStream = () => fetch(rootUrl + '/stream/start');
+export const stopStream = () => fetch(rootUrl + '/stream/end');
 
 export const getImg = async (setAnalysedFrame) => {
   const response = await fetch(rootUrl + '/getLatestFrame');
@@ -37,8 +36,8 @@ export const getImg = async (setAnalysedFrame) => {
   }
 }
 
-export const streamWebcamDetections = async () => {
-  const response = await fetch(rootUrl + '/getDetections');
+export const startDetectionsOnStream = async () => {
+  const response = await fetch('http://localhost:4000/getDetections/start');
   const reader = response.body.getReader();
 
   const read = async () => {
@@ -59,3 +58,5 @@ export const streamWebcamDetections = async () => {
   };
   read()
 }
+
+export const stopDetectionsOnStream = async () => await fetch('http://localhost:4000/getDetections/stop');

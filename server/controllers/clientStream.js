@@ -3,7 +3,6 @@ import { exec } from 'child_process'
 /* 
   This implementation is horrifically hacky, sorry for anyone who reads this 
 */
-
 let stream = null;
 export const controlStream = async (req, res) => {
   const cmd = req.params.cmd;
@@ -16,27 +15,6 @@ export const controlStream = async (req, res) => {
     res.status(200).send({message: 'streaming ended!'});
   } else {
     res.end('invalid request')
-  }
-}
-
-export const startStream = (req, res) => {
-  stream = exec('python image-processing/streamVid.py', (err, stdout, stderr) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
-    // console.log(stdout);
-  });
-  res.status(200).send({message: 'streaming started!'});
-}
-
-export const stopStream = (req, res) => {
-  if (stream) {
-    console.log('killingStream');
-    stream.kill('SIGINT');
-    res.status(200).send({message: 'streaming ended!'});
-  } else {
-    res.status(500).send({message: 'no stream running'});
   }
 }
 

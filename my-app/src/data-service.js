@@ -49,10 +49,12 @@ export const countPeoplePerPeroid = (data) => {
   const countPerPeroid = [];
 
   let peroid = 10000;
-  if (data.length > 20) {
-    const dataPoint = 20;
-    peroid = (data.slice(-1)[0][0]-data[0][0])/dataPoint;
-  }
+  
+  //TODO: Intelligent resizing
+  // if (data.length > 20) {
+  //   const dataPoint = 20;
+  //   peroid = (data.slice(-1)[0][0]-data[0][0])/dataPoint;
+  // }
 
   if (data.length === 0 ) return countPeoplePerPeroid
   //intialize at
