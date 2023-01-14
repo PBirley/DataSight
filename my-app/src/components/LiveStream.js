@@ -39,7 +39,7 @@ return (
       <button onClick={handleStart}>Start</button>
       <button onClick={handleStop}>Stop</button>
     </div>
-    <img class='generic-container' src={analysedFrame} resizeMode={"contain"} alt='waiting on frame'/>
+    <img className='generic-container' src={analysedFrame} alt='waiting on frame'/>
 </div>
   );
 }

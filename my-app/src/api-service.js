@@ -24,7 +24,7 @@ export const streamDemoDataStart = async (dispatch) => {
 export const streamDemoDataStop = async () => await fetch(rootUrl + '/streamDemoData/stop');
 
 export const startDetectionsOnStream = async (dispatch) => {
-  const response = await fetch(rootUrl + 'getDetections/start');
+  const response = await fetch(rootUrl + '/getDetections/start');
   const reader = response.body.getReader();
 
   const read = async () => {
@@ -41,6 +41,7 @@ export const startDetectionsOnStream = async (dispatch) => {
   read()
 }
 
+export const stopDetectionsOnStream = async () => await fetch(rootUrl + '/getDetections/stop');
 
 export const startStream = () => fetch(rootUrl + '/stream/start');
 export const stopStream = () => fetch(rootUrl + '/stream/end');
@@ -57,5 +58,3 @@ export const getImg = async (setAnalysedFrame) => {
   }
 }
 
-
-export const stopDetectionsOnStream = async () => await fetch('http://localhost:4000/getDetections/stop');
