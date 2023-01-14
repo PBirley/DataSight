@@ -5,6 +5,7 @@ import csv
 import time
 from keras.models import load_model
 from fasteners import InterProcessLock
+import json
 path = os.getcwd() + '/image-processing'
 
 #Load Models
@@ -129,7 +130,16 @@ def annotate_img_and_update_current_faces(img):
             # Push to history
             if face.gender == 'man' or face.gender == 'woman':
                 history_of_faces.append((frame_count, face.gender,face.age))
-                csv_writer.writerow((frame_count, face.gender,face.age))
+                # write to csv
+                
+                # file = open(path + '/liveData.csv', 'w')
+                # csv_writer = csv.writer(file)
+                # csv_writer.writerow((frame_count, face.gender,face.age))
+                # file.close()
+                
+                with open(path + '/data.txt', 'w') as file:
+                    file.write(json.dumps([frame_count, face.gender, face.age]))
+                
             current_faces.remove(face)
         #Else annotate image with face rect
         elif face.num_of_detections > 3: 
@@ -175,9 +185,9 @@ buffer_zone = int(screen_width*0.1)
 
 frame_count = 0
 header = ['frame', 'gender', 'age']
-file = open(path + 'liveData.csv', 'w')
-csv_writer = csv.writer(file)
-csv_writer.writerow(header)
+# file = open(path + '/liveData.csv', 'w')
+# csv_writer = csv.writer(file)
+# csv_writer.writerow(header)
 
 def writeImg(img): 
     if not os.path.isfile(path + '/0.jpg'):
@@ -197,11 +207,6 @@ while True:
     img = frame.copy()
     
     writeImg(img)
-    
-    # with InterProcessLock(path + '/result.jpg'):
-        # cv2.imwrite(path + '/result.jpg', img) 
-        
-    # time.sleep(1)
     k = cv2.waitKey(1)
     if k == 27:
         break
@@ -212,4 +217,3 @@ while True:
   
 cap.release()
 cv2.destroyAllWindows()
-file.close()

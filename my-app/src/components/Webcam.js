@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getImg, startStream, stopStream } from '../api-service';
+import { getImg, startStream, stopStream, streamWebcamDetections } from '../api-service';
 
 export default function Webcam() {
   const [analysedFrame, setAnalysedFrame] = useState(null);
@@ -21,12 +21,15 @@ export default function Webcam() {
       await stopStream()
     }
   };
-  
+
+  const startDetections = async () => streamWebcamDetections ()
+
 
 return (
   <div key={100}>
       <button onClick={handleStart}>Start</button>
       <button onClick={handleStop}>Stop</button>
+      <button onClick={startDetections}>Start Detections</button>
 
       <img src={analysedFrame} resizeMode={"contain"} alt='waiting on frame'/>
   </div>

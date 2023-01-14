@@ -29,12 +29,33 @@ export const getImg = async (setAnalysedFrame) => {
   const response = await fetch(rootUrl + '/getLatestFrame');
   const { processedImg } = await response.json();
   // console.log(processedImg);
-  if (processedImg.length > 0) {
+  if (processedImg) {
     const res = 'data:image/jpeg;base64, ' + processedImg;
-    console.log('update');
     return res;
   } else {
-    console.log('no image', processedImg);
     return null;
   }
+}
+
+export const streamWebcamDetections = async () => {
+  const response = await fetch(rootUrl + '/getDetections');
+  const reader = response.body.getReader();
+
+  const read = async () => {
+    const { done, value } = await reader.read();
+
+    if (done) {
+      console.log('All Data Recieved');
+      return;
+    }
+    let chunk = new TextDecoder('utf-8').decode(value);
+    chunk = JSON.parse(chunk);
+    //Add the current time
+    chunk.unshift(Date.now());
+
+    console.log(chunk);
+
+    read()
+  };
+  read()
 }
