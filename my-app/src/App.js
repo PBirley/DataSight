@@ -4,7 +4,7 @@ import SplashScreen from './components/SplashScreen';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import DemoPage from './components/DemoPage';
 import BackendStreamPage from './components/BackendStreamPage';
-import ResponsiveDrawer from './components/PersistentDrawerLeft';
+import ResponsiveDrawer from './components/ResponsiveDrawer';
 import DailyMotionPlayer from 'react-player/dailymotion';
 import Ui from './components/Ui';
 

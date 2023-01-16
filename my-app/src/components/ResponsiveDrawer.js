@@ -18,7 +18,7 @@ import ListItemText from '@mui/material/ListItemText';
 import CenterFocusWeakIcon from '@mui/icons-material/CenterFocusWeak';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import logo from '../images/logo.svg';
-import styles from './NavBar.module.css';
+// import styles from './NavBar.module.css';
 import DemoPage from './DemoPage';
 import { Typography } from '@material-ui/core';
 
@@ -91,7 +91,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MiniDrawer() {
+export default function ResponsiveDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -126,6 +126,7 @@ export default function MiniDrawer() {
           {/* <img className={styles.logo} src={logo} alt=''/> */}
         </Toolbar>
       </AppBar>
+
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
@@ -183,6 +184,7 @@ export default function MiniDrawer() {
           ))}
         </List>
       </Drawer>
+      
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
         <DemoPage />
