@@ -6,8 +6,6 @@ import { parseAgeData } from '../../data-service';
 export default function BarChartAges() {
 
   const [ageData, setAgeData] = useState([0,0,0,0,0]);
-
-  
   const data = useSelector(state => state.streamingData);
   
   useEffect(() => {
@@ -41,7 +39,7 @@ export default function BarChartAges() {
         options={options} 
         series={[{data:ageData}]} 
         type="bar" 
-        height={250}
+        // height={250}
       />
   </div>
   )

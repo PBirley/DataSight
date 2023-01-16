@@ -33,7 +33,7 @@ export default function PieChartEthnicities() {
             options={options}
             series={ethnicityData}
             type="donut"
-            width={435}
+            // width={435}
           />
         </div>
       </div>

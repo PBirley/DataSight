@@ -34,7 +34,7 @@ export default function PieChartGenders() {
             options={options}
             series={genderData}
             type="donut"
-            width={372}
+            // width={372}
           />
         </div>
       </div>
