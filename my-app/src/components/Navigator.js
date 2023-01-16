@@ -12,12 +12,9 @@ import BackendStreamPage from './BackendStreamPage';
 export const drawerWidth = 240;
 
 const startingState = {
-  home: <HomeDash />,
   streams: [
     {name: 'Demo', component: <DemoPage />},
     {name: 'LiveStream_1', component: <BackendStreamPage />},
-    // ['Demo', <DemoPage />],
-    // ['LiveStream_1', <BackendStreamPage />]
   ],
   reports: [
     {name: 'Report 16/01/2022', component: <HomeDash />},
@@ -29,7 +26,7 @@ export default function Navigator() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [dashViewer, setDashViewer] = React.useState(startingState)
-  const [displayPage, setDisplayPage] = React.useState(dashViewer.home);
+  const [displayPage, setDisplayPage] = React.useState(<HomeDash dashViewer={dashViewer}/>);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -40,10 +37,8 @@ export default function Navigator() {
   };
 
   const handleStreamSelect = (clicked) => {
-    console.log('stream selected', clicked);
-    // const [dashName] = clicked
     const streamAndReports = [...dashViewer.streams, ...dashViewer.reports];
-    if (clicked === 'Home') setDisplayPage(dashViewer.home);
+    if (clicked === 'Home') setDisplayPage(<HomeDash dashViewer={dashViewer}/>);
     else {
       streamAndReports.filter(obj => {
         if (obj.name === clicked) setDisplayPage(obj.component)

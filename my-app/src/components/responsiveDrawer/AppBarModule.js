@@ -4,8 +4,9 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Typography } from '@material-ui/core';
+import { Avatar, Box, Container, Typography } from '@material-ui/core';
 import { drawerWidth } from '../Navigator';
+import profile from '../../images/profile.jpeg'
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -28,24 +29,25 @@ const AppBar = styled(MuiAppBar, {
 export default function AppBarModule({open, handleDrawerOpen}) {
   return (
     <AppBar position="fixed" open={open}>
-    <Toolbar>
-      <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        onClick={handleDrawerOpen}
-        edge="start"
-        sx={{
-          marginRight: 5,
-          ...(open && { display: 'none' }),
-        }}
-      >
-        <MenuIcon />
-      </IconButton>
-      <Typography variant="h6" noWrap component="div">
-        DataSight
-      </Typography>
-      {/* <img className={styles.logo} src={logo} alt=''/> */}
-    </Toolbar>
-  </AppBar>
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{
+              marginRight: 5,
+              ...(open && { display: 'none' }),
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography noWrap variant="h6" component="div">
+            DataSight
+          </Typography>
+          {/* <img className={styles.logo} src={logo} alt=''/> */}
+          {/* <Avatar alt='Peter Birley' src={profile} /> */}
+        </Toolbar>
+    </AppBar>
   )
 }
