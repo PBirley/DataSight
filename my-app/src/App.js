@@ -6,11 +6,13 @@ import DemoPage from './components/DemoPage';
 import BackendStreamPage from './components/BackendStreamPage';
 import ResponsiveDrawer from './components/PersistentDrawerLeft';
 import DailyMotionPlayer from 'react-player/dailymotion';
+import Ui from './components/Ui';
 
 function App() {
   return (
     <div>
-      <ResponsiveDrawer/>
+      {/* <ResponsiveDrawer/> */}
+      <Ui></Ui>
       {/* <DemoPage /> */}
       {/* <Router>
         <NavBar />
