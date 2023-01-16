@@ -1,5 +1,5 @@
 import './App.css';
-import SplashScreen from './components/SplashScreen';
+import SplashScreen from './components/HomeDash';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import DemoPage from './components/DemoPage';
 import BackendStreamPage from './components/BackendStreamPage';

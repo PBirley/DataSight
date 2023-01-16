@@ -6,13 +6,12 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import AssessmentIcon from '@mui/icons-material/Assessment';
-import { drawerWidth } from './Navigator';
+import { drawerWidth } from '../Navigator';
 import DrawerElement from './DrawerElement';
+import CenterFocusWeakIcon from '@mui/icons-material/CenterFocusWeak';
+import HomeIcon from '@mui/icons-material/Home';
+import AddIcon from '@mui/icons-material/Add';
 
 
 const openedMixin = (theme) => ({
@@ -63,7 +62,7 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 
-export default function DrawerModule({handleDrawerClose, handleStreamSelect, open, theme}) {
+export default function DrawerModule({dashViewer, handleDrawerClose, handleStreamSelect, open, theme}) {
   return (
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
@@ -73,33 +72,22 @@ export default function DrawerModule({handleDrawerClose, handleStreamSelect, ope
         </DrawerHeader>
         <Divider />
         <List>
-          {['Demo', 'LiveStream 1'].map((text, index) => (
-            <DrawerElement text={text} open={open} handleStreamSelect={handleStreamSelect} index={index}/>
-          ))}
+            <DrawerElement  key={'Home'} text={'Home'} open={open} 
+            handleStreamSelect={handleStreamSelect} icon={<HomeIcon />}/>
         </List>
         <Divider />
         <List>
-          {['Report 16/01/2022', 'Report 14/01/2022'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <AssessmentIcon />
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
+          {dashViewer.streams.map((stream, index) => (
+            <DrawerElement  key={stream.name}  text={stream.name} open={open} 
+            handleStreamSelect={handleStreamSelect} icon={<CenterFocusWeakIcon />}/>
+          ))}
+          <DrawerElement text={'Add new stream'} open={open} icon={<AddIcon />}/>
+        </List>
+        <Divider />
+        <List>
+          {dashViewer.reports.map((report, index) => (
+            <DrawerElement  key={report.name}  text={report.name} open={open} 
+            handleStreamSelect={handleStreamSelect} icon={<AssessmentIcon />}/>
           ))}
         </List>
       </Drawer>

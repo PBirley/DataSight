@@ -3,14 +3,13 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import CenterFocusWeakIcon from '@mui/icons-material/CenterFocusWeak';
 
-export default function DrawerElement ({text, open, handleStreamSelect, index}) {
+export default function DrawerElement ({text, open, handleStreamSelect, icon}) {
   function elementClicked () {
-    handleStreamSelect(index);
+    handleStreamSelect(text);
   }
   return (
-    <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+    <ListItem disablePadding sx={{ display: 'block' }}>
       <ListItemButton
         sx={{
           minHeight: 48,
@@ -26,7 +25,7 @@ export default function DrawerElement ({text, open, handleStreamSelect, index}) 
             justifyContent: 'center',
           }}
         >
-          <CenterFocusWeakIcon />
+          {icon}
         </ListItemIcon>
         <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
       </ListItemButton>
