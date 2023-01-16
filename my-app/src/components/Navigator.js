@@ -26,7 +26,7 @@ export default function Navigator() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [dashViewer, setDashViewer] = React.useState(startingState)
-  const [displayPage, setDisplayPage] = React.useState(<HomeDash dashViewer={dashViewer}/>);
+  const [displayPage, setDisplayPage] = React.useState('Home');
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -38,7 +38,7 @@ export default function Navigator() {
 
   const handleStreamSelect = (clicked) => {
     const streamAndReports = [...dashViewer.streams, ...dashViewer.reports];
-    if (clicked === 'Home') setDisplayPage(<HomeDash dashViewer={dashViewer}/>);
+    if (clicked === 'Home') setDisplayPage('Home');
     else {
       streamAndReports.filter(obj => {
         if (obj.name === clicked) setDisplayPage(obj.component)
@@ -46,15 +46,29 @@ export default function Navigator() {
     }
   }
 
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBarModule open={open}  handleDrawerOpen={handleDrawerOpen} />
-      <DrawerModule dashViewer={dashViewer} handleDrawerClose={handleDrawerClose} handleStreamSelect={handleStreamSelect} open={open} theme={theme}/>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        {displayPage}
+  
+    if (displayPage === 'Home') {
+      return (
+        <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBarModule />
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <DrawerHeader />
+          <HomeDash dashViewer={dashViewer} handleStreamSelect={handleStreamSelect} />
+        </Box>
       </Box>
-    </Box>
-  );
+      )
+    } else {
+      return (
+        <Box sx={{ display: 'flex' }}>
+          <CssBaseline />
+          <AppBarModule open={open}  handleDrawerOpen={handleDrawerOpen} />
+          <DrawerModule dashViewer={dashViewer} handleDrawerClose={handleDrawerClose} handleStreamSelect={handleStreamSelect} open={open} theme={theme}/>
+          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+            <DrawerHeader />
+            {displayPage}
+          </Box>
+        </Box>
+      )
+    }
 }

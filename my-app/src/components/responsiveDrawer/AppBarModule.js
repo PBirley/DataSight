@@ -30,7 +30,7 @@ export default function AppBarModule({open, handleDrawerOpen}) {
   return (
     <AppBar position="fixed" open={open}>
         <Toolbar>
-          <IconButton
+          {handleDrawerOpen && <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
@@ -41,7 +41,7 @@ export default function AppBarModule({open, handleDrawerOpen}) {
             }}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton>}
           <Typography noWrap variant="h6" component="div">
             DataSight
           </Typography>
