@@ -1,19 +1,14 @@
 import './App.css';
-import NavBar from './components/NavBar';
 import SplashScreen from './components/SplashScreen';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import DemoPage from './components/DemoPage';
 import BackendStreamPage from './components/BackendStreamPage';
-import ResponsiveDrawer from './components/ResponsiveDrawer';
-import DailyMotionPlayer from 'react-player/dailymotion';
-import Ui from './components/Ui';
+import Navigator from './components/Navigator';
 
 function App() {
   return (
     <div>
-      {/* <ResponsiveDrawer/> */}
-      <Ui></Ui>
-      {/* <DemoPage /> */}
+      <Navigator />
       {/* <Router>
         <NavBar />
         <Routes>

@@ -9,7 +9,7 @@ import { DrawerHeader } from './DrawerModule';
 
 export const drawerWidth = 240;
 
-export default function ResponsiveDrawer() {
+export default function Navigator() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -21,14 +21,18 @@ export default function ResponsiveDrawer() {
     setOpen(false);
   };
 
+  const handleStreamSelect = (target) => {
+    console.log('stream selected', target);
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBarModule open={open}  handleDrawerOpen={handleDrawerOpen} />
-      <DrawerModule handleDrawerClose={handleDrawerClose} open={open} theme={theme}/>
+      <DrawerModule handleDrawerClose={handleDrawerClose} handleStreamSelect={handleStreamSelect} open={open} theme={theme}/>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <DemoPage />
+        {/* <DemoPage /> */}
       </Box>
     </Box>
   );

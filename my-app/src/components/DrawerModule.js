@@ -10,9 +10,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import CenterFocusWeakIcon from '@mui/icons-material/CenterFocusWeak';
 import AssessmentIcon from '@mui/icons-material/Assessment';
-import { drawerWidth } from './Ui';
+import { drawerWidth } from './Navigator';
+import DrawerElement from './DrawerElement';
 
 
 const openedMixin = (theme) => ({
@@ -63,7 +63,7 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 
-export default function DrawerModule({handleDrawerClose, open, theme}) {
+export default function DrawerModule({handleDrawerClose, handleStreamSelect, open, theme}) {
   return (
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
@@ -74,26 +74,7 @@ export default function DrawerModule({handleDrawerClose, open, theme}) {
         <Divider />
         <List>
           {['Demo', 'LiveStream 1'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? 'initial' : 'center',
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : 'auto',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <CenterFocusWeakIcon />
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
+            <DrawerElement text={text} open={open} handleStreamSelect={handleStreamSelect} index={index}/>
           ))}
         </List>
         <Divider />
@@ -124,3 +105,4 @@ export default function DrawerModule({handleDrawerClose, open, theme}) {
       </Drawer>
   )
 }
+
