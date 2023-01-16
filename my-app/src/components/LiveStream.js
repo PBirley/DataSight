@@ -1,3 +1,4 @@
+import { Button, ButtonGroup } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getImg, startDetectionsOnStream, startStream, stopDetectionsOnStream, stopStream } from '../api-service';
@@ -35,10 +36,11 @@ export default function LiveStream() {
 
 return (
   <div className={styles.container}>
-    <div>
-      <button onClick={handleStart}>Start</button>
-      <button onClick={handleStop}>Stop</button>
-    </div>
+    <ButtonGroup variant='contained'>
+      <Button onClick={handleStart}>Start</Button>
+      <Button onClick={handleStop}>Stop</Button>
+      <Button>Clear Data</Button>
+    </ButtonGroup>
     <img className='generic-container' src={analysedFrame} alt='waiting on frame'/>
 </div>
   );

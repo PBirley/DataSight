@@ -189,12 +189,14 @@ header = ['frame', 'gender', 'age']
 # csv_writer = csv.writer(file)
 # csv_writer.writerow(header)
 
+
+#change to if as quiicker to write new file than to go through whole program
 def writeImg(img): 
     if not os.path.isfile(path + '/0.jpg'):
         cv2.imwrite(path + '/0.jpg', img) 
-    elif not os.path.isfile(path + '/1.jpg'):
+    if not os.path.isfile(path + '/1.jpg'):
         cv2.imwrite(path + '/1.jpg', img) 
-    elif not os.path.isfile(path + '/2.jpg'):
+    if not os.path.isfile(path + '/2.jpg'):
         cv2.imwrite(path + '/2.jpg', img) 
 
 while True:
