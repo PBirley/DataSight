@@ -6,8 +6,6 @@ import BarChartAges from './graphModules/BarChartAges';
 import LineGraphPeoplePerPeroid from './graphModules/LineGraphPeoplePerPeroid';
 
 export default function DataDashboard() {
-
-
   return (
     <div>
       <div className={styles.chartElement}>

@@ -8,13 +8,16 @@ import AppBarModule from './responsiveDrawer/AppBarModule';
 import { DrawerHeader } from './responsiveDrawer/DrawerModule';
 import HomeDash from './HomeDash';
 import BackendStreamPage from './BackendStreamPage';
+import StreamDashBoard from './StreamDashBoard';
+import VideoPlayer from './VideoPlayer';
+import LiveStream from './LiveStream';
 
 export const drawerWidth = 240;
 
 const startingState = {
   streams: [
-    {name: 'Demo', component: <DemoPage />},
-    {name: 'LiveStream_1', component: <BackendStreamPage />},
+    {name: 'Demo', component: <StreamDashBoard Video={<VideoPlayer />} /> },
+    {name: 'LiveStream_1', component: <BackendStreamPage /> },
   ],
   reports: [
     {name: 'Report 16/01/2022', component: <HomeDash />},
