@@ -6,6 +6,7 @@ import LineGraphPeoplePerPeroid from './graphModules/LineGraphPeoplePerPeroid';
 import { Container } from '@mui/system';
 import { Grid, Paper, Typography } from '@mui/material';
 import ReactPlayer from 'react-player';
+import VideoPlayer from './VideoPlayer';
 
 export default function StreamDashBoard({Video}) {
   return (
@@ -17,7 +18,7 @@ export default function StreamDashBoard({Video}) {
             <Typography >
               DemoVideo
             </Typography>
-            {Video}
+            <VideoPlayer></VideoPlayer>
             </Paper>
           </Grid>
           <Grid item xs={12}>
