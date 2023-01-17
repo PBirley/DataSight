@@ -55,3 +55,28 @@ export const getImg = async (setAnalysedFrame) => {
   }
 }
 
+
+// Report api
+
+export const addReportToDb = (reportTitle, source, demoData) => {
+  const currentDate = new Date();
+  const dateTime = currentDate.getFullYear() + '-' +
+      (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' +
+      currentDate.getDate().toString().padStart(2, '0') + ' ' +
+      currentDate.getHours().toString().padStart(2, '0') + ':' +
+      currentDate.getMinutes().toString().padStart(2, '0') + ':' +
+      currentDate.getSeconds().toString().padStart(2, '0');
+
+  fetch('http://localHost:4000/report', {
+    method: 'POST', 
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      reportTitle: reportTitle,
+      source: source,
+      dateCreated: dateTime,
+      data: demoData
+    })
+   })
+}
