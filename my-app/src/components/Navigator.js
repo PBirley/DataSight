@@ -2,22 +2,22 @@ import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import DemoPage from './DemoPage';
 import DrawerModule from './responsiveDrawer/DrawerModule';
 import AppBarModule from './responsiveDrawer/AppBarModule';
 import { DrawerHeader } from './responsiveDrawer/DrawerModule';
 import HomeDash from './HomeDash';
-import BackendStreamPage from './BackendStreamPage';
-import StreamDashBoard from './StreamDashBoard';
-import VideoPlayer from './VideoPlayer';
-import LiveStream from './LiveStream';
+import StreamDashBoardWebcam from './StreamDashBoardWebcam';
+import StreamDashBoardDemo from './StreamDashBoardDemo';
+import { useDispatch } from 'react-redux';
+import { streamDemoDataStop } from '../api-service';
+import { resetStreamData } from '../redux/actions';
 
 export const drawerWidth = 240;
 
 const startingState = {
   streams: [
-    {name: 'Demo', component: <DemoPage /> },
-    {name: 'LiveStream_1', component: <BackendStreamPage /> },
+    {name: 'Demo', component: <StreamDashBoardDemo /> },
+    {name: 'LiveStream_1', component: <StreamDashBoardWebcam /> },
   ],
   reports: [
     {name: 'Report 16/01/2022', component: <HomeDash />},
@@ -30,6 +30,7 @@ export default function Navigator() {
   const [open, setOpen] = React.useState(false);
   const [dashViewer, setDashViewer] = React.useState(startingState)
   const [displayPage, setDisplayPage] = React.useState('Home');
+  const dispatch = useDispatch();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -40,12 +41,17 @@ export default function Navigator() {
   };
 
   const handleStreamSelect = (clicked) => {
+    //Reset Redux on page change
+    streamDemoDataStop();
+    dispatch(resetStreamData());
+
     const streamAndReports = [...dashViewer.streams, ...dashViewer.reports];
     if (clicked === 'Home') setDisplayPage('Home');
     else {
       streamAndReports.filter(obj => {
         if (obj.name === clicked) setDisplayPage(obj.component)
       })
+
     }
   }
 

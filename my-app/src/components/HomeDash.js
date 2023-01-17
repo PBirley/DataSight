@@ -1,19 +1,10 @@
-import { Box, Button, Card, CardActions, CardContent, Grid, Paper, Typography } from '@material-ui/core';
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux';
-import { streamDemoDataStop } from '../api-service';
-import { resetStreamData } from '../redux/actions';
+import { Box, Button, Card, CardActions, CardContent, Grid, Typography } from '@material-ui/core';
+import React from 'react'
 import CenterFocusWeakIcon from '@mui/icons-material/CenterFocusWeak';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 
 
 export default function HomeDash({dashViewer, handleStreamSelect}) {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    streamDemoDataStop();
-    dispatch(resetStreamData());
-  },[dispatch])
   
   return (
     <React.Fragment>
