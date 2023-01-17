@@ -13,9 +13,7 @@ export const streamDemoDataStart = async (dispatch) => {
       console.log('All Data Recieved');
       return;
     }
-
-    updateStreamingData(dispatch, value);
-
+    updateStreamingData(dispatch, value, 'demo');
     read()
   };
   read()
@@ -34,8 +32,7 @@ export const startDetectionsOnStream = async (dispatch) => {
       console.log('All Data Recieved');
       return;
     }
-
-    updateStreamingData(dispatch, value)
+    updateStreamingData(dispatch, value, 'liveStream_1')
     read()
   };
   read()

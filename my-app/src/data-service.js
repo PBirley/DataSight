@@ -1,6 +1,6 @@
 import { addToStreamData } from "./redux/actions";
 
-export const updateStreamingData = (dispatch, packet) => {
+export const updateStreamingData = (dispatch, packet, streamName) => {
   //Convert data back to an array
   let chunk = new TextDecoder('utf-8').decode(packet);
   chunk = JSON.parse(chunk);
@@ -10,7 +10,7 @@ export const updateStreamingData = (dispatch, packet) => {
 
   console.log('adding new detections', chunk);
 
-  dispatch(addToStreamData(chunk));
+  dispatch(addToStreamData(chunk, streamName));
 }
 
 /*

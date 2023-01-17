@@ -3,11 +3,10 @@ import ReactApexChart from 'react-apexcharts'
 import { useSelector } from "react-redux";
 import { countPeoplePerPeroid } from '../../data-service';
 
-export default function LineGraphPeoplePerPeroid() {
+export default function LineGraphPeoplePerPeroid({data}) {
   const [peoplePerPeroidData, setPeoplePerPeroidData] = useState([])
   const [peroid, setPeroid] = useState(1);
 
-  const data = useSelector(state => state.streamingData)
 
   useEffect(() => {
 

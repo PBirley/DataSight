@@ -3,10 +3,8 @@ import ApexChart from 'react-apexcharts'
 import { useSelector } from "react-redux";
 import { parseGenderData } from '../../data-service';
 
-export default function PieChartGenders() {
+export default function PieChartGenders({data}) {
   const [genderData, setGenderData] = useState([0,0])
-  
-  const data = useSelector(state => state.streamingData)
   
   useEffect(() => {
     setGenderData(parseGenderData(data))

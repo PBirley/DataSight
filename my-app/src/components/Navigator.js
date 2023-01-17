@@ -43,7 +43,7 @@ export default function Navigator() {
   const handleStreamSelect = (clicked) => {
     //Reset Redux on page change
     streamDemoDataStop();
-    dispatch(resetStreamData());
+    dispatch(resetStreamData('demo'));
 
     const streamAndReports = [...dashViewer.streams, ...dashViewer.reports];
     if (clicked === 'Home') setDisplayPage('Home');
@@ -51,33 +51,31 @@ export default function Navigator() {
       streamAndReports.filter(obj => {
         if (obj.name === clicked) setDisplayPage(obj.component)
       })
-
     }
   }
-
   
-    if (displayPage === 'Home') {
-      return (
-        <Box sx={{ display: 'flex' }}>
+  if (displayPage === 'Home') {
+    return (
+      <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <AppBarModule />
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <DrawerHeader />
+        <HomeDash dashViewer={dashViewer} handleStreamSelect={handleStreamSelect} />
+      </Box>
+    </Box>
+    )
+  } else {
+    return (
+      <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBarModule />
+        <AppBarModule open={open}  handleDrawerOpen={handleDrawerOpen} />
+        <DrawerModule dashViewer={dashViewer} handleDrawerClose={handleDrawerClose} handleStreamSelect={handleStreamSelect} open={open} theme={theme}/>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
-          <HomeDash dashViewer={dashViewer} handleStreamSelect={handleStreamSelect} />
+          {displayPage}
         </Box>
       </Box>
-      )
-    } else {
-      return (
-        <Box sx={{ display: 'flex' }}>
-          <CssBaseline />
-          <AppBarModule open={open}  handleDrawerOpen={handleDrawerOpen} />
-          <DrawerModule dashViewer={dashViewer} handleDrawerClose={handleDrawerClose} handleStreamSelect={handleStreamSelect} open={open} theme={theme}/>
-          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-            <DrawerHeader />
-            {displayPage}
-          </Box>
-        </Box>
-      )
-    }
+    )
+  }
 }

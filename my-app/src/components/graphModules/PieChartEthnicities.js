@@ -3,10 +3,8 @@ import ApexChart from 'react-apexcharts'
 import { useSelector } from "react-redux";
 import { parseEthnicityData } from '../../data-service';
 
-export default function PieChartEthnicities() {
+export default function PieChartEthnicities({data}) {
   const [ethnicityData, setEthnicityData] = useState([0,0,0,0,0])
-  
-  const data = useSelector(state => state.streamingData)
   
   useEffect(() => {
     setEthnicityData(parseEthnicityData(data))

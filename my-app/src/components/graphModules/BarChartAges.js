@@ -3,10 +3,8 @@ import ReactApexChart from 'react-apexcharts'
 import { useSelector } from "react-redux";
 import { parseAgeData } from '../../data-service';
 
-export default function BarChartAges() {
-
+export default function BarChartAges({data}) {
   const [ageData, setAgeData] = useState([0,0,0,0,0]);
-  const data = useSelector(state => state.streamingData);
   
   useEffect(() => {
     setAgeData(parseAgeData(data))

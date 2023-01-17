@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getImg, startDetectionsOnStream, startStream, stopDetectionsOnStream, stopStream } from '../api-service';
 import { Container } from '@mui/system';
 import { Button, ButtonGroup, Grid, Paper, Typography } from '@mui/material';
 import GraphDashComponent from './graphModules/GraphDashComponent';
+import { resetStreamData } from '../redux/actions';
 
 
 export default function StreamDashBoardWebcam({Video}) {
@@ -11,6 +12,7 @@ export default function StreamDashBoardWebcam({Video}) {
   const [analysedFrame, setAnalysedFrame] = useState(null);
   const [streamFlag, setStreamFlag] = useState(null);
   const dispatch = useDispatch();
+  const liveData = useSelector(state => state.streamingData.liveStream_1)
 
   const handleStart = async () => {
     //TODO: Loading img needed while, whilst waiting for first img
@@ -36,6 +38,13 @@ export default function StreamDashBoardWebcam({Video}) {
     }
   };
 
+  const handleClear = () => {
+    dispatch(resetStreamData('liveStream_1'));
+  }
+
+
+
+
   return (
     <React.Fragment>
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4}}>
@@ -50,11 +59,11 @@ export default function StreamDashBoardWebcam({Video}) {
                 <Button onClick={handleStart} size="small" color="primary">Start</Button>
                 <Button onClick={handleStop} size="small" color="primary">Stop</Button>
                 <Button size="small" color="primary">Create Report</Button>
-                <Button size="small" color="secondary">Clear Data</Button>
+                <Button onClick={handleClear} size="small" color="secondary">Clear Data</Button>
               </ButtonGroup>
             </Paper>
           </Grid>
-          <GraphDashComponent/>
+          <GraphDashComponent data={liveData} gender={true} ages={true}/>
         </Grid>
       </Container>
     </React.Fragment>
