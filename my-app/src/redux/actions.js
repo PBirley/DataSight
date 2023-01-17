@@ -10,3 +10,10 @@ export const resetStreamData = (streamName) => ({
   type: RESET_DATA,
   payload: {streamName}
 })
+
+
+export const ADD_REPORTS = 'ADD_REPORTS'
+export const addReports = (reports) => ({
+  type: ADD_REPORTS,
+  reports
+})

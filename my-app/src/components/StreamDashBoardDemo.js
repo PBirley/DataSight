@@ -30,7 +30,7 @@ export default function StreamDashBoardDemo() {
     dispatch(resetStreamData('demo'));
   }
 
-  const generateReport = () => addReportToDb('Demo Report','demo',demoData)
+  const generateReport = () => addReportToDb('Demo Report','demo', demoData)
 
   const demoData = useSelector(state => state.streamingData.demo)
   

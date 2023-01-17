@@ -8,9 +8,11 @@ import { DrawerHeader } from './responsiveDrawer/DrawerModule';
 import HomeDash from './HomeDash';
 import StreamDashBoardWebcam from './StreamDashBoardWebcam';
 import StreamDashBoardDemo from './StreamDashBoardDemo';
-import { useDispatch } from 'react-redux';
-import { streamDemoDataStop } from '../api-service';
-import { resetStreamData } from '../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { getReports, streamDemoDataStop } from '../api-service';
+import { addReports, resetStreamData } from '../redux/actions';
+import GraphDashComponent from './graphModules/GraphDashComponent';
+import ReportPage from './ReportPage';
 
 export const drawerWidth = 240;
 
@@ -30,7 +32,32 @@ export default function Navigator() {
   const [open, setOpen] = React.useState(false);
   const [dashViewer, setDashViewer] = React.useState(startingState)
   const [displayPage, setDisplayPage] = React.useState('Home');
+  // const [reports, setReports] = React.useState([]);
   const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    getReports().then(response => response.json()).then( data => {
+      dispatch(addReports(data));
+    }).catch(err => console.log(err));
+  },[])
+
+  const reports = useSelector(state => state.reportData);
+
+  React.useEffect(()=>{
+    console.log('reports', reports);
+    const dashViewerCopy = dashViewer;
+    dashViewerCopy['reports'] = [];
+    for (const report of reports) {
+      const dash = {
+        id: report['_id'],
+        name: report['dateCreated'],
+        component: <ReportPage data={report['data']} />
+      }
+      dashViewerCopy['reports'].push(dash);
+    }
+    setDashViewer(dashViewerCopy);
+  }, [reports])
+
 
   const handleDrawerOpen = () => {
     setOpen(true);

@@ -22,7 +22,7 @@ export default function HomeDash({dashViewer, handleStreamSelect}) {
       <Typography variant="h4">Reports</Typography>
       <Grid container spacing={3}>
         {dashViewer.reports.map((report, index) => (
-              <ReportsDashCard  key={report.name}  text={report.name} icon={<AssessmentIcon />}/>
+              <ReportsDashCard  key={report.name}  handleStreamSelect={handleStreamSelect} text={report.name} icon={<AssessmentIcon />}/>
         ))}
       </Grid>
     </React.Fragment>
@@ -56,7 +56,13 @@ function StreamsDashCard ({text, icon, handleStreamSelect}) {
   )
 }
 
-function ReportsDashCard ({text, icon}) {
+function ReportsDashCard ({text, icon, handleStreamSelect}) {
+  function elementClicked () {
+    handleStreamSelect(text);
+  }
+  const handleDelete = () => {
+
+  }
   return (
     <Grid item xs={12} sm={6} md={4}>
       <Card >
@@ -65,7 +71,7 @@ function ReportsDashCard ({text, icon}) {
           <Typography variant="h6">{text}</Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button onClick={elementClicked} size="small" color="primary">
             View Report
           </Button>
           <Button size="small" color="secondary">

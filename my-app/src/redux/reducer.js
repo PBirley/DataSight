@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { ADD_TO_STREAM_DATA, RESET_DATA } from "./actions";
+import { ADD_REPORTS, ADD_TO_STREAM_DATA, RESET_DATA } from "./actions";
 
 const dataStreamsIntialState = {
   'demo': [],
@@ -28,8 +28,18 @@ const streamingData = ( state = dataStreamsIntialState, action) => {
   }
 }
 
+const reportData = ( state = [], action) => {
+  switch (action.type) {
+    case ADD_REPORTS:
+      return action['reports']
+    default:
+      return state
+  }
+}
+
 const reducers = combineReducers({
-  streamingData
+  streamingData,
+  reportData
 })
 
 export default reducers;
