@@ -16,7 +16,7 @@ export const drawerWidth = 240;
 
 const startingState = {
   streams: [
-    {name: 'Demo', component: <DemoPage Video={<VideoPlayer />} /> },
+    {name: 'Demo', component: <DemoPage /> },
     {name: 'LiveStream_1', component: <BackendStreamPage /> },
   ],
   reports: [
