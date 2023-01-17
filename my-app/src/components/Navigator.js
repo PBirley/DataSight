@@ -13,7 +13,7 @@ import { getReports, streamDemoDataStop } from '../api-service';
 import { addReports, resetStreamData } from '../redux/actions';
 import ReportPage from './ReportPage';
 
-export const drawerWidth = 240;
+export const drawerWidth = 350;
 
 const startingState = {
   streams: [
@@ -23,31 +23,28 @@ const startingState = {
   reports: []
 }
 
-export default function Navigator({reports}) {
+export default function Navigator() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [dashViewer, setDashViewer] = React.useState(startingState)
   const [displayPage, setDisplayPage] = React.useState('Home');
-  // const [reports, setReports] = React.useState([]);
   const dispatch = useDispatch();
+  const reports = useSelector(state => state.reportData);
 
   React.useEffect(() => {
     getReports().then(response => response.json()).then( data => {
       dispatch(addReports(data));
     }).catch(err => console.log(err));
   },[])
-
   
-
   React.useEffect(()=>{
-    console.log('reports changed');
     const dashViewerCopy = {...dashViewer};
     dashViewerCopy['reports'] = [];
     for (const report of reports) {
       const dash = {
         id: report['_id'],
-        name: report['dateCreated'],
-        component: <ReportPage data={report['data']} />
+        name: report['reportTitle'] + ' ' + report['dateCreated'],
+        component: <ReportPage report={report}/>
       }
       dashViewerCopy['reports'].push(dash);
     }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getImg, startDetectionsOnStream, startStream, stopDetectionsOnStream, stopStream } from '../api-service';
+import { addReportToDb, getImg, startDetectionsOnStream, startStream, stopDetectionsOnStream, stopStream } from '../api-service';
 import { Container } from '@mui/system';
 import { Button, ButtonGroup, Grid, Paper, Typography } from '@mui/material';
 import GraphDashComponent from './graphModules/GraphDashComponent';
@@ -42,8 +42,7 @@ export default function StreamDashBoardWebcam({Video}) {
     dispatch(resetStreamData('liveStream_1'));
   }
 
-
-
+  const generateReport = () => addReportToDb(dispatch, 'Webcam Report','liveStream_1', liveData)
 
   return (
     <React.Fragment>
@@ -58,7 +57,7 @@ export default function StreamDashBoardWebcam({Video}) {
               <ButtonGroup sx={{ p: 2}}>
                 <Button onClick={handleStart} size="small" color="primary">Start</Button>
                 <Button onClick={handleStop} size="small" color="primary">Stop</Button>
-                <Button size="small" color="primary">Create Report</Button>
+                <Button onClick={generateReport} size="small" color="primary">Create Report</Button>
                 <Button onClick={handleClear} size="small" color="secondary">Clear Data</Button>
               </ButtonGroup>
             </Paper>
