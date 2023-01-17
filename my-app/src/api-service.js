@@ -1,4 +1,5 @@
 import { updateStreamingData } from "./data-service";
+import { addReports } from "./redux/actions";
 
 const rootUrl = 'http://localhost:4000';
 
@@ -58,7 +59,7 @@ export const getImg = async (setAnalysedFrame) => {
 
 // Report api
 
-export const addReportToDb = async (reportTitle, source, demoData) => {
+export const addReportToDb = async (dispatch, reportTitle, source, demoData) => {
   const currentDate = new Date();
   const dateTime = currentDate.getFullYear() + '-' +
       (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' +
@@ -79,10 +80,16 @@ export const addReportToDb = async (reportTitle, source, demoData) => {
       data: demoData
     })
   }).then(response => response.json()).then(data => {
-    console.log(data)
+    dispatch(addReports(data))
   })
 }
 
 export const getReports = () => {
-  return fetch('http://localhost:4000/reports');
+  return fetch(rootUrl + '/reports');
+}
+
+export const deleteReportInDb = (id) => {
+  return fetch(rootUrl + '/report/' + id, {
+    method: 'DELETE'
+  })
 }

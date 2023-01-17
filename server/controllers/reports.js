@@ -34,8 +34,7 @@ export const deleteReport = async (req, res) => {
     console.log('deleting: ', id);
     Reports.findByIdAndDelete(id, (err) => console.log(err));
 
-    const reports = await Reports.find();
-    res.status(200).send(reports)
+    res.status(200)
   } catch (error) {
     res.status(500).send({error:error});
   }

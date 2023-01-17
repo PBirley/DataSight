@@ -11,7 +11,6 @@ import StreamDashBoardDemo from './StreamDashBoardDemo';
 import { useDispatch, useSelector } from 'react-redux';
 import { getReports, streamDemoDataStop } from '../api-service';
 import { addReports, resetStreamData } from '../redux/actions';
-import GraphDashComponent from './graphModules/GraphDashComponent';
 import ReportPage from './ReportPage';
 
 export const drawerWidth = 240;
@@ -21,13 +20,10 @@ const startingState = {
     {name: 'Demo', component: <StreamDashBoardDemo /> },
     {name: 'LiveStream_1', component: <StreamDashBoardWebcam /> },
   ],
-  reports: [
-    {name: 'Report 16/01/2022', component: <HomeDash />},
-    {name: 'Report 13/01/2022', component: <HomeDash />},
-  ]
+  reports: []
 }
 
-export default function Navigator() {
+export default function Navigator({reports}) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [dashViewer, setDashViewer] = React.useState(startingState)
@@ -41,11 +37,11 @@ export default function Navigator() {
     }).catch(err => console.log(err));
   },[])
 
-  const reports = useSelector(state => state.reportData);
+  
 
   React.useEffect(()=>{
-    console.log('reports', reports);
-    const dashViewerCopy = dashViewer;
+    console.log('reports changed');
+    const dashViewerCopy = {...dashViewer};
     dashViewerCopy['reports'] = [];
     for (const report of reports) {
       const dash = {

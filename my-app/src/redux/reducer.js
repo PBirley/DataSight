@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { ADD_REPORTS, ADD_TO_STREAM_DATA, RESET_DATA } from "./actions";
+import { ADD_REPORTS, ADD_TO_STREAM_DATA, DELETE_REPORT, RESET_DATA } from "./actions";
 
 const dataStreamsIntialState = {
   'demo': [],
@@ -32,6 +32,12 @@ const reportData = ( state = [], action) => {
   switch (action.type) {
     case ADD_REPORTS:
       return action['reports']
+    case DELETE_REPORT:
+      const id = action['id'];
+      const stateCopy = [...state]
+      const newState = stateCopy.filter(report => report['_id'] !== id)
+      return newState
+
     default:
       return state
   }

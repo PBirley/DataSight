@@ -17,3 +17,9 @@ export const addReports = (reports) => ({
   type: ADD_REPORTS,
   reports
 })
+
+export const DELETE_REPORT = 'DELETE_REPORT'
+export const deleteReport = (id) => ({
+  type: DELETE_REPORT,
+  id
+})

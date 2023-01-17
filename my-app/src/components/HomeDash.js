@@ -1,10 +1,17 @@
 import { Box, Button, Card, CardActions, CardContent, Grid, Typography } from '@material-ui/core';
-import React from 'react'
+import React, { useEffect } from 'react'
 import CenterFocusWeakIcon from '@mui/icons-material/CenterFocusWeak';
 import AssessmentIcon from '@mui/icons-material/Assessment';
+import { deleteReportInDb } from '../api-service';
+import { useDispatch } from 'react-redux';
+import { addReports, deleteReport } from '../redux/actions';
 
 
 export default function HomeDash({dashViewer, handleStreamSelect}) {
+
+  useEffect(() => {
+    console.log('dashviewer changed');
+  }, [dashViewer])
   
   return (
     <React.Fragment>
@@ -22,7 +29,7 @@ export default function HomeDash({dashViewer, handleStreamSelect}) {
       <Typography variant="h4">Reports</Typography>
       <Grid container spacing={3}>
         {dashViewer.reports.map((report, index) => (
-              <ReportsDashCard  key={report.name}  handleStreamSelect={handleStreamSelect} text={report.name} icon={<AssessmentIcon />}/>
+              <ReportsDashCard  key={report.name} dbId={report.id} handleStreamSelect={handleStreamSelect} text={report.name} icon={<AssessmentIcon />}/>
         ))}
       </Grid>
     </React.Fragment>
@@ -56,12 +63,16 @@ function StreamsDashCard ({text, icon, handleStreamSelect}) {
   )
 }
 
-function ReportsDashCard ({text, icon, handleStreamSelect}) {
+function ReportsDashCard ({text, icon, dbId,handleStreamSelect}) {
+  const dispatch = useDispatch();
+
   function elementClicked () {
     handleStreamSelect(text);
   }
   const handleDelete = () => {
-
+    // console.log(dbId);
+    deleteReportInDb(dbId);
+    dispatch(deleteReport(dbId));
   }
   return (
     <Grid item xs={12} sm={6} md={4}>
@@ -74,7 +85,7 @@ function ReportsDashCard ({text, icon, handleStreamSelect}) {
           <Button onClick={elementClicked} size="small" color="primary">
             View Report
           </Button>
-          <Button size="small" color="secondary">
+          <Button onClick={handleDelete} size="small" color="secondary">
             Delete
           </Button>
         </CardActions>
