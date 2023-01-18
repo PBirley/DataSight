@@ -3,6 +3,7 @@ import { addReports } from "./redux/actions";
 
 const rootUrl = 'http://localhost:4000';
 
+//Demo Video Controls
 export const streamDemoDataStart = async (dispatch) => {
   const response = await fetch(rootUrl + '/streamDemoData/start');
   const reader = response.body.getReader();
@@ -15,13 +16,14 @@ export const streamDemoDataStart = async (dispatch) => {
       return;
     }
     updateStreamingData(dispatch, value, 'demo');
-    read()
+    read();
   };
-  read()
+  read();
 }
-
 export const streamDemoDataStop = async () => await fetch(rootUrl + '/streamDemoData/stop');
 
+
+//Webcam Feed Controls
 export const startDetectionsOnStream = async (dispatch) => {
   const response = await fetch(rootUrl + '/getDetections/start');
   const reader = response.body.getReader();
@@ -33,12 +35,11 @@ export const startDetectionsOnStream = async (dispatch) => {
       console.log('All Data Recieved');
       return;
     }
-    updateStreamingData(dispatch, value, 'liveStream_1')
-    read()
+    updateStreamingData(dispatch, value, 'liveStream_1');
+    read();
   };
-  read()
+  read();
 }
-
 export const stopDetectionsOnStream = async () => await fetch(rootUrl + '/getDetections/stop');
 
 export const startStream = () => fetch(rootUrl + '/stream/start');
@@ -47,7 +48,6 @@ export const stopStream = () => fetch(rootUrl + '/stream/end');
 export const getImg = async (setAnalysedFrame) => {
   const response = await fetch(rootUrl + '/getLatestFrame');
   const { processedImg } = await response.json();
-  // console.log(processedImg);
   if (processedImg) {
     const res = 'data:image/jpeg;base64, ' + processedImg;
     return res;
@@ -57,8 +57,7 @@ export const getImg = async (setAnalysedFrame) => {
 }
 
 
-// Report api
-
+//Report api
 export const addReportToDb = async (dispatch, reportTitle, source, demoData) => {
   const currentDate = new Date();
   const dateTime = currentDate.getFullYear() + '-' +

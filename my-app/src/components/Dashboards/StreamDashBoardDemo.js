@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import { Container } from '@mui/system';
 import { Button, ButtonGroup, Grid, Paper, Typography } from '@mui/material';
-import GraphDashComponent from './graphModules/GraphDashComponent';
+import GraphDashComponent from '../graphModules/GraphDashComponent';
 import { useDispatch, useSelector } from 'react-redux';
-import { addReportToDb, streamDemoDataStart, streamDemoDataStop } from '../api-service';
-import VideoPlayer from './VideoPlayer';
-import { resetStreamData } from '../redux/actions';
+import { addReportToDb, streamDemoDataStart, streamDemoDataStop } from '../../api-service';
+import DemoVideo from './DemoVideo';
+import { resetStreamData } from '../../redux/actions';
 
 export default function StreamDashBoardDemo() {
   
   const dispatch = useDispatch();
   const [playing, setPlaying] = useState(false);
-  const [rerender, setRerender] = useState(false);
+  const [restart, setRestart] = useState(false);
   
   
   const handlePlay = () => {
@@ -22,7 +22,7 @@ export default function StreamDashBoardDemo() {
   const handleRestart = () => {
     streamDemoDataStop();
     dispatch(resetStreamData('demo'));
-    setRerender(prevRender => !prevRender);
+    setRestart(prevRender => !prevRender);
     setPlaying(false);
   }
 
@@ -30,9 +30,9 @@ export default function StreamDashBoardDemo() {
     dispatch(resetStreamData('demo'));
   }
 
-  const generateReport = () => addReportToDb(dispatch, 'Demo Report','demo', demoData)
+  const generateReport = () => addReportToDb(dispatch, 'Demo Report','demo', demoData);
 
-  const demoData = useSelector(state => state.streamingData.demo)
+  const demoData = useSelector(state => state.streamingData.demo);
   
   return (
     <React.Fragment>
@@ -41,9 +41,9 @@ export default function StreamDashBoardDemo() {
           <Grid item>
             <Paper sx={{display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Typography variant="h6" sx={{ p: 2}}>
-                DemoVideo
+                Demo Video
               </Typography>
-              <VideoPlayer playing={playing}  rerender={rerender}/>
+              <DemoVideo playing={playing}  restart={restart}/>
               <ButtonGroup sx={{ p: 2}}>
                 <Button onClick={handlePlay} size="small" color="primary">Start</Button>
                 <Button onClick={handleRestart} size="small" color="primary">Restart</Button>

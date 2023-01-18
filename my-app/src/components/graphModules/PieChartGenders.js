@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import ApexChart from 'react-apexcharts'
-import { useSelector } from "react-redux";
 import { parseGenderData } from '../../data-service';
 
 export default function PieChartGenders({data}) {
@@ -32,7 +31,6 @@ export default function PieChartGenders({data}) {
             options={options}
             series={genderData}
             type="donut"
-            // width={372}
           />
         </div>
       </div>

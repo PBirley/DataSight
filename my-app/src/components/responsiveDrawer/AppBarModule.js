@@ -4,9 +4,8 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Avatar, Box, Container, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { drawerWidth } from '../Navigator';
-import profile from '../../images/profile.jpeg'
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -45,8 +44,6 @@ export default function AppBarModule({open, handleDrawerOpen}) {
           <Typography noWrap variant="h6" component="div">
             DataSight
           </Typography>
-          {/* <img className={styles.logo} src={logo} alt=''/> */}
-          {/* <Avatar alt='Peter Birley' src={profile} /> */}
         </Toolbar>
     </AppBar>
   )

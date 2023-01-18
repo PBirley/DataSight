@@ -1,5 +1,6 @@
 import { addToStreamData } from "./redux/actions";
 
+//Update Redux Store with stream data
 export const updateStreamingData = (dispatch, packet, streamName) => {
   //Convert data back to an array
   let chunk = new TextDecoder('utf-8').decode(packet);
@@ -47,12 +48,11 @@ export const parseAgeData = (data) => {
 }
 
 export const countPeoplePerPeroid = (data) => {
-  //each array element [timestamp, count]
   const countPerPeroid = [];
 
   let peroid = 10000;
   
-  //TODO: Intelligent resizing
+  //TODO: Intelligent resizing depending on range of time
   // if (data.length > 20) {
   //   const dataPoint = 20;
   //   peroid = (data.slice(-1)[0][0]-data[0][0])/dataPoint;

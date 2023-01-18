@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addReportToDb, getImg, startDetectionsOnStream, startStream, stopDetectionsOnStream, stopStream } from '../api-service';
+import { addReportToDb, getImg, startDetectionsOnStream, startStream, stopDetectionsOnStream, stopStream } from '../../api-service';
 import { Container } from '@mui/system';
 import { Button, ButtonGroup, Grid, Paper, Typography } from '@mui/material';
-import GraphDashComponent from './graphModules/GraphDashComponent';
-import { resetStreamData } from '../redux/actions';
+import GraphDashComponent from '../graphModules/GraphDashComponent';
+import { resetStreamData } from '../../redux/actions';
 
 
+//TODO: Modular version of connecting to stream needs to b worked out back and front end
 export default function StreamDashBoardWebcam({Video}) {
 
   const [analysedFrame, setAnalysedFrame] = useState(null);
@@ -33,7 +34,7 @@ export default function StreamDashBoardWebcam({Video}) {
       await stopDetectionsOnStream();
       clearInterval(streamFlag)
 
-      //TODO: Function doesn't work, python script doesnt end
+      //BUG: Function doesn't work, python script doesnt end
       await stopStream()
     }
   };

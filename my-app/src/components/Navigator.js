@@ -1,17 +1,17 @@
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addReports, resetStreamData } from '../redux/actions';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
 import DrawerModule from './responsiveDrawer/DrawerModule';
 import AppBarModule from './responsiveDrawer/AppBarModule';
 import { DrawerHeader } from './responsiveDrawer/DrawerModule';
-import HomeDash from './HomeDash';
-import StreamDashBoardWebcam from './StreamDashBoardWebcam';
-import StreamDashBoardDemo from './StreamDashBoardDemo';
-import { useDispatch, useSelector } from 'react-redux';
 import { getReports, streamDemoDataStop } from '../api-service';
-import { addReports, resetStreamData } from '../redux/actions';
-import ReportPage from './ReportPage';
+import HomeDash from './Dashboards/HomeDash/HomeDash';
+import StreamDashBoardWebcam from './Dashboards/StreamDashBoardWebcam';
+import StreamDashBoardDemo from './Dashboards/StreamDashBoardDemo';
+import ReportPage from './Dashboards/ReportPage';
 
 export const drawerWidth = 350;
 
@@ -31,12 +31,14 @@ export default function Navigator() {
   const dispatch = useDispatch();
   const reports = useSelector(state => state.reportData);
 
+  //On start get reports from Database
   React.useEffect(() => {
     getReports().then(response => response.json()).then( data => {
       dispatch(addReports(data));
     }).catch(err => console.log(err));
   },[])
   
+  //When reports change update the homedash and side navigaation
   React.useEffect(()=>{
     const dashViewerCopy = {...dashViewer};
     dashViewerCopy['reports'] = [];
@@ -60,8 +62,9 @@ export default function Navigator() {
     setOpen(false);
   };
 
-  const handleStreamSelect = (clicked) => {
-    //Reset Redux on page change
+  //
+  const handleNavigation = (clicked) => {
+    //Reset Demo Video data
     streamDemoDataStop();
     dispatch(resetStreamData('demo'));
 
@@ -81,7 +84,7 @@ export default function Navigator() {
       <AppBarModule />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <HomeDash dashViewer={dashViewer} handleStreamSelect={handleStreamSelect} />
+        <HomeDash dashViewer={dashViewer} handleStreamSelect={handleNavigation} />
       </Box>
     </Box>
     )
@@ -90,7 +93,7 @@ export default function Navigator() {
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
         <AppBarModule open={open}  handleDrawerOpen={handleDrawerOpen} />
-        <DrawerModule dashViewer={dashViewer} handleDrawerClose={handleDrawerClose} handleStreamSelect={handleStreamSelect} open={open} theme={theme}/>
+        <DrawerModule dashViewer={dashViewer} handleDrawerClose={handleDrawerClose} handleStreamSelect={handleNavigation} open={open} theme={theme}/>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
           {displayPage}

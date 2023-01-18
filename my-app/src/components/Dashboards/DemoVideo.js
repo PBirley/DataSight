@@ -1,12 +1,11 @@
 import React, { useEffect, useRef } from 'react'
 import ReactPlayer from 'react-player'
 
-export default function VideoPlayer({playing, rerender}) {
+export default function DemoVideo({playing, restart}) {
   const playerRef = useRef(null);
   useEffect(() => {
-    console.log("Child component re-rendered");
     playerRef.current.seekTo(0);
-  }, [rerender]);
+  }, [restart]);
 
   return (
       <ReactPlayer 

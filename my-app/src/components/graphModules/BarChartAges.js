@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import ReactApexChart from 'react-apexcharts'
-import { useSelector } from "react-redux";
 import { parseAgeData } from '../../data-service';
 
 export default function BarChartAges({data}) {
@@ -28,7 +27,6 @@ export default function BarChartAges({data}) {
     dataLabels: {
       enabled: false
     },
-
   };
 
   return (
@@ -37,7 +35,6 @@ export default function BarChartAges({data}) {
         options={options} 
         series={[{data:ageData}]} 
         type="bar" 
-        // height={250}
       />
   </div>
   )

@@ -1,6 +1,6 @@
 import { Container, Grid, Typography } from '@mui/material'
 import React from 'react'
-import GraphDashComponent from './graphModules/GraphDashComponent'
+import GraphDashComponent from '../graphModules/GraphDashComponent'
 
 export default function ReportPage({report}) {
   return (

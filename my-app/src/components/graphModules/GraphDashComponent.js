@@ -6,6 +6,7 @@ import LineGraphPeoplePerPeroid from './LineGraphPeoplePerPeroid';
 import { Grid, Paper } from '@mui/material';
 
 export default function GraphDashComponent({data, ethinicity=false, ages=false, gender=false}) {
+  //TODO: Make selection of graph elements modular depending of what the user selects from drop down list
   return (
     <React.Fragment>
       <Grid item xs={12}>
