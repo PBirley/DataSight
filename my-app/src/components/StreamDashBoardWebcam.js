@@ -53,7 +53,9 @@ export default function StreamDashBoardWebcam({Video}) {
               <Typography variant="h6" sx={{ p: 2}}>
                 LiveStream_1
               </Typography>
-              <img src={analysedFrame} alt='waiting on frame'/>
+              {analysedFrame && (
+                <img src={analysedFrame} alt='waiting on frame'/>
+              )}
               <ButtonGroup sx={{ p: 2}}>
                 <Button onClick={handleStart} size="small" color="primary">Start</Button>
                 <Button onClick={handleStop} size="small" color="primary">Stop</Button>
