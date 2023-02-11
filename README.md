@@ -1,24 +1,25 @@
-#DataSight
+# DataSight
 DataSight is a platform that detects, tracks, and infers individuals' age and gender in real-time for data collection in industries such as retail.
 
-##Features
+## Features
 Real-time data visualization
 Computer vision algorithm
 Deep learning implementation
 Technology Stack
 DataSight has been developed using the following technologies:
 
-React
-Material UI
-Node.js
-Express
-MongoDB
-Python
-OpenCV
-TensorFlow
-Numpy
-Keras
-Installation
+- React
+- Material UI
+- Node.js
+- Express
+- MongoDB
+- Python
+- OpenCV
+- TensorFlow
+- Numpy
+- Keras
+
+## Installation
 To set up DataSight, follow these steps:
 
 Clone this repository to your local machine using the following command:
