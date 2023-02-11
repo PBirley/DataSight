@@ -1,4 +1,4 @@
-###DataSight
+#DataSight
 DataSight is a platform that detects, tracks, and infers individuals' age and gender in real-time for data collection in industries such as retail.
 
 ##Features
