@@ -3,3 +3,5 @@
 /server/node_modules
 *.mp4
 .package-lock
+*.env
+*.jpg

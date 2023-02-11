@@ -1,10 +1,19 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 
-async function main () {
-  //Connecting to db
-  console.log('connected to database');
-  await mongoose.connect('mongodb+srv://PBirley:vyJIXOyinLk6pxYS@todolist.vmth9w2.mongodb.net/?retryWrites=true&w=majority');
+const mongoURL = process.env.MONGO_DB_ATLAS_URL
+console.log(mongoURL);
+
+const connectDB = async () => {
+  try {
+    mongoose.set('strictQuery', true);
+    await mongoose.connect(mongoURL);
+    console.log('Successfully connected to the database 🎉');
+  } catch (err) {
+    console.log('Mongoose connection err: ' + err);
+  }
 }
-main().catch(err => console.log(err));
+connectDB()
 
 export default mongoose;
