@@ -5,6 +5,14 @@ DataSight is a platform that detects, tracks, and infers individuals' age and ge
 - Real-time data visualization with Full-Stack Application 
 - Lightweight computer vision algorithm with face-detection with age and gender estimation using system webcam
 
+## Screenshots
+
+<div style="display: flex; flex-wrap: wrap; justify-content: center;">
+  <img src='./readMe/Dashboard.png' width="800" style="margin: 20px;"/>
+  <img src='./readMe/Report.png' width="800" style="margin: 20px;"/>
+  <img src='./readMe/Webcam.png' width="800" style="margin: 20px;"/>
+</div>
+
 ## Technology Stack:
 DataSight has been developed using the following technologies:
 
