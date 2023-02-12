@@ -10,7 +10,6 @@ DataSight is a platform that detects, tracks, and infers individuals' age and ge
 <div style="display: flex; flex-wrap: wrap; justify-content: center;">
   <img src='./readMe/Dashboard.png' width="800" style="margin: 20px;"/>
   <img src='./readMe/Report.png' width="800" style="margin: 20px;"/>
-  <img src='./readMe/Webcam.png' width="800" style="margin: 20px;"/>
 </div>
 
 ## Technology Stack:
