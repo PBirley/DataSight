@@ -5,3 +5,5 @@
 .package-lock
 *.env
 *.jpg
+/venv
+/Models
