@@ -182,17 +182,18 @@ buffer_zone = 0
 header = ['frame', 'gender', 'age']
 frame_count = 0
 
-is_running = False
+recording_flag = False
+cap = cv2.VideoCapture(0)
 
-def begin_detections(cap):
-    global screen_height,screen_width,channels,buffer_zone,frame_count,is_running
+def begin_detections():
+    global screen_height,screen_width,channels,buffer_zone,frame_count,is_running,recording_flag
 
     ret,frame = cap.read(0)
     (screen_height, screen_width, channels) = frame.shape
     buffer_zone = int(screen_width*0.1)
 
     while True:
-        if is_running:
+        if recording_flag:
             ret,frame = cap.read(0)
                 
             if ret:
@@ -210,19 +211,25 @@ def begin_detections(cap):
                 break
             
         else: 
-            break
+            cv2.imshow('Webcam Feed',frame)
+            while not recording_flag:
+                pass
     
     print('ending video')
     cap.release()
     cv2.destroyAllWindows()
    
-def start_video():
-    cap = cv2.VideoCapture(0)
-    global is_running
-    is_running = True
-    t = threading.Thread(target=lambda: begin_detections(cap))
-    t.start()
+first_start = False
+def start():
+    global recording_flag, first_start
+    recording_flag = True
+    if not first_start:
+        t = threading.Thread(target=lambda: begin_detections())
+        t.start()
+        first_start = True
     
-def end_video():
-    global is_running
-    is_running = False
+
+def resume():
+    global recording_flag
+    recording_flag = True
+
