@@ -1,5 +1,5 @@
 # DataSight
-DataSight is a platform that detects, tracks, and infers individuals' age and gender in real-time for data collection and visualisation in industries such as retail.
+DataSight is a platform that detects, tracks, and infers individuals' age and gender in real-time for data collection and visualisation in industries such as retail. I'm in the process of migrating the backend to python with flask to make it possible to have an unlimited number of 'camera nodes' linked to an account distrubted on external devices.
 
 ## Features
 - Real-time data visualization with Full-Stack Application 
@@ -21,6 +21,7 @@ DataSight has been developed using the following technologies:
 - Express
 - MongoDB
 - Python
+- Flask
 - OpenCV
 - TensorFlow
 - Numpy
