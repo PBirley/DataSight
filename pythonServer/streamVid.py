@@ -186,7 +186,7 @@ recording_flag = False
 cap = cv2.VideoCapture(0)
 
 def begin_detections():
-    global screen_height,screen_width,channels,buffer_zone,frame_count,is_running,recording_flag
+    global screen_height,screen_width,channels,buffer_zone,frame_count,recording_flag
 
     ret,frame = cap.read(0)
     (screen_height, screen_width, channels) = frame.shape
@@ -229,7 +229,7 @@ def start():
         first_start = True
     
 
-def resume():
+def pause():
     global recording_flag
-    recording_flag = True
+    recording_flag = False
 

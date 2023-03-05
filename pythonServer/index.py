@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from streamVid import start, resume, pause
+from streamVid import start, pause
 
 app = Flask(__name__)
 

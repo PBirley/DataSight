@@ -26,6 +26,7 @@ export default function StreamDashBoardWebcam({Video}) {
 
   const getLatestFrame = async () => {
     const newImg = await getImg()
+    console.log(newImg)
     if (newImg !== null) setAnalysedFrame(newImg);
   }
 

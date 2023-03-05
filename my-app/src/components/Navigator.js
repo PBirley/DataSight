@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addReports, resetStreamData } from '../redux/actions';
 import { useTheme } from '@mui/material/styles';
@@ -12,6 +12,7 @@ import HomeDash from './Dashboards/HomeDash/HomeDash';
 import StreamDashBoardWebcam from './Dashboards/StreamDashBoardWebcam';
 import StreamDashBoardDemo from './Dashboards/StreamDashBoardDemo';
 import ReportPage from './Dashboards/ReportPage';
+import StreamDashBoardModularPy from './Dashboards/StreamDashBoardModularPy';
 
 export const drawerWidth = 350;
 
@@ -19,27 +20,28 @@ const startingState = {
   streams: [
     {name: 'Demo', component: <StreamDashBoardDemo /> },
     {name: 'LiveStream_1', component: <StreamDashBoardWebcam /> },
+    {name: 'LiveStream_py_test', component: <StreamDashBoardModularPy />}
   ],
   reports: []
 }
 
 export default function Navigator() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-  const [dashViewer, setDashViewer] = React.useState(startingState)
-  const [displayPage, setDisplayPage] = React.useState('Home');
+  const [open, setOpen] = useState(false);
+  const [dashViewer, setDashViewer] = useState(startingState)
+  const [displayPage, setDisplayPage] = useState('Home');
   const dispatch = useDispatch();
   const reports = useSelector(state => state.reportData);
 
   //On start get reports from Database
-  React.useEffect(() => {
+  useEffect(() => {
     getReports().then(response => response.json()).then( data => {
       dispatch(addReports(data));
     }).catch(err => console.log(err));
   },[])
   
   //When reports change update the homedash and side navigaation
-  React.useEffect(()=>{
+  useEffect(()=>{
     const dashViewerCopy = {...dashViewer};
     dashViewerCopy['reports'] = [];
     for (const report of reports) {
